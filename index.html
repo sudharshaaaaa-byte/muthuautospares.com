@@ -5,11 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Muthu Auto Spares &amp; Scrap Yard</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
     --red:#e30613;
     --red-dark:#b3050f;
+    --green:#2ecc71;
     --black:#000000;
     --near-black:#141414;
     --text-light:#f5f5f5;
@@ -82,6 +83,7 @@
   }
   .topbar-phones a:hover{color:var(--red);}
   .topbar-phones svg{width:13px;height:13px;fill:var(--red);}
+  
   .social-icons{
     display:flex;
     gap:14px;
@@ -165,6 +167,11 @@
     background:var(--red);
   }
 
+  /* Specific mobile actions block (hidden on desktop) */
+  .mobile-actions {
+    display: none; 
+  }
+
   .call-box{
     display:flex;
     align-items:stretch;
@@ -216,9 +223,9 @@
     gap:5px;
     background:rgba(255,255,255,0.06);
     border:1px solid rgba(255,255,255,0.12);
-    border-radius:8px;
-    width:44px;
-    height:44px;
+    border-radius:6px;
+    width:42px;
+    height:42px;
     cursor:pointer;
     padding:0;
     flex-shrink:0;
@@ -236,6 +243,49 @@
   .burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
   .burger.open span:nth-child(2){opacity:0;}
   .burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+  /* ===== STORE STATUS BADGE (mobile) ===== */
+  .status-badge{
+    display:flex;
+    align-items:center;
+    gap:7px;
+    height:40px;
+    padding:0 12px;
+    border-radius:20px;
+    background:rgba(255,255,255,0.06);
+    border:1px solid rgba(255,255,255,0.12);
+    flex-shrink:0;
+  }
+  .status-badge .dot{
+    width:8px;height:8px;
+    border-radius:50%;
+    flex-shrink:0;
+  }
+  .status-badge.is-open .dot{
+    background:var(--green);
+    box-shadow:0 0 0 0 rgba(46,204,113,0.6);
+    animation:pulse-dot 1.8s infinite;
+  }
+  .status-badge.is-closed .dot{
+    background:var(--red);
+  }
+  .status-badge .status-text{
+    font-family:'Oswald',sans-serif;
+    font-size:11px;
+    font-weight:600;
+    letter-spacing:0.5px;
+    text-transform:uppercase;
+    color:var(--text-light);
+    white-space:nowrap;
+  }
+  .status-badge.is-open .status-text{color:var(--green);}
+  .status-badge.is-closed .status-text{color:var(--text-muted);}
+
+  @keyframes pulse-dot{
+    0%{box-shadow:0 0 0 0 rgba(46,204,113,0.55);}
+    70%{box-shadow:0 0 0 7px rgba(46,204,113,0);}
+    100%{box-shadow:0 0 0 0 rgba(46,204,113,0);}
+  }
 
   /* ===== MOBILE MENU ===== */
   .mobile-menu-overlay{
@@ -259,7 +309,7 @@
     height:100%;
     width:78%;
     max-width:340px;
-    background:var(--black);
+    background:var(--near-black);
     border-left:1px solid rgba(255,255,255,0.08);
     transform:translateX(100%);
     transition:transform .35s cubic-bezier(.4,0,.2,1);
@@ -392,87 +442,496 @@
 
   /* ===== HERO ===== */
   .hero{
-    position:relative;
-    width: 100%;
-    background: var(--black);
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
+    width:100%;
+    overflow:hidden;
+    background:var(--black);
   }
-  
-  .hero img {
-    width: 100%;
-    height: auto;
-    display: block;
-    object-fit: contain;
+  .hero img{
+    width:100%;
+    height:auto;
+    display:block;
   }
 
-  /* ===== RESPONSIVE ===== */
+  /* ========================================= */
+  /* === RESPONSIVE SECTION (SLEEK CUSTOM) === */
+  /* ========================================= */
+  
   @media (max-width:1150px){
     .nav-links{display:none;}
     .burger{display:flex;}
   }
-  
+
   @media (max-width:900px){
     .call-box{display:none;}
   }
-  
+
   @media (max-width:768px){
-    .topbar-inner{
-      padding: 10px 18px;
-      justify-content: space-between;
-      gap:8px;
+    /* Hide topbar on mobile to keep it clean */
+    .topbar { display: none; }
+
+    /* Redesigned sleek mobile navbar */
+    .navbar { 
+      background: rgba(0, 0, 0, 0.9);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(255,255,255,0.08); /* clean, no red line */
     }
-    .topbar-left{
-      display:flex;
-      gap:14px;
-      overflow-x:auto;
-      flex-wrap:nowrap;
-      -ms-overflow-style:none;
-      scrollbar-width:none;
+    
+    .navbar-inner {
+      padding: 0 16px;
+      height: 70px;
+      gap: 0;
     }
-    .topbar-left::-webkit-scrollbar{display:none;}
-    .topbar-item{white-space:nowrap;}
-    .topbar-item .full-text{display:none;}
-    .topbar-item .short-text{display:inline;}
-    .topbar-right{
-      flex-direction:row;
-      align-items:center;
-      gap:12px;
-      width:auto;
+    
+    /* Clean Logo Integration */
+    .logo {
+      padding: 0;
+      background: transparent;
+      border: none;
     }
-    .topbar-phones{
-      display:none;
-    }
-    .social-icons{
-      gap:8px;
-    }
-    .social-icons a{
-      width:26px;height:26px;
+    .logo img {
+      height: 44px; /* Perfectly sized to fit vertically */
+      width: auto;
     }
 
-    .navbar-inner{
-      padding: 8px 16px 8px 4px;
+    /* Right side actions wrapper */
+    .mobile-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
-    .logo{
-      padding:6px 0 6px 6px;
+
+    /* Refined Burger Menu */
+    .burger {
+      display: flex;
+      flex: 0 0 42px;
+      height: 42px;
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 6px;
     }
-    .logo img{
-      height: 62px;
+
+    /* Hero Banner Mobile Crop */
+    .hero { height: 240px; }
+    .hero img {
+      width:100%;
+      height:100%;
+      max-width:none;
+      object-fit:cover;
+      object-position: left center;
     }
   }
-  
+
   @media (max-width: 380px) {
-    .navbar-inner{
-      padding: 8px 12px 8px 2px;
-    }
-    .logo{
-      padding:4px 0 4px 4px;
-    }
-    .logo img{
-      height: 54px;
-    }
-    .topbar-left{gap:10px;}
+    .navbar-inner { height: 64px; padding: 0 12px; }
+    .logo img { height: 38px; }
+    .mobile-actions { gap: 8px; }
+    .burger { width: 38px; height: 38px; flex-basis: 38px; }
+    .status-badge { height: 36px; padding: 0 9px; }
+    .status-badge .status-text{ font-size:10px; }
+    .hero { height: 200px; }
+  }
+</style>
+
+<style>
+  /* ================= ABOUT PAGE STYLES ================= */
+  :root{
+    --bg:            #0a0a0a;
+    --bg-panel:      #131313;
+    --bg-card:       #17171777;
+    --card-border:   #2a2222;
+    --text:          #f4f0ee;
+    --text-dim:      #a89f9c;
+    --text-faint:    #726867;
+    --radius:        16px;
+  }
+
+  .about-section{
+    position:relative;
+    background:
+      linear-gradient(180deg, rgba(8,7,7,.80) 0%, rgba(8,7,7,.90) 35%, var(--bg) 78%),
+      url('image/background image.png');
+    background-repeat:no-repeat;
+    background-position:center top, center top;
+    background-size:cover, cover;
+    background-attachment:scroll;
+    padding:80px 6vw 0;
+  }
+
+  .about-section > .inner{ position:relative; z-index:1; }
+
+  .about-section h1,.about-section h2,.about-section h3,.about-section h4{ font-family:'Oswald',sans-serif; letter-spacing:.02em; }
+
+  .eyebrow{
+    display:inline-block;
+    font-family:'Oswald',sans-serif;
+    font-size:13px;
+    font-weight:600;
+    letter-spacing:.28em;
+    color:var(--red);
+    margin-bottom:10px;
+  }
+
+  .accent{ color:var(--red); }
+
+  .divider{
+    width:64px;
+    height:3px;
+    background:var(--red);
+    border-radius:2px;
+    margin:14px auto 0;
+  }
+
+  .section-head{
+    text-align:center;
+    max-width:640px;
+    margin:0 auto 46px;
+  }
+  .section-head h2{
+    font-size:clamp(24px,4vw,34px);
+    font-weight:700;
+    text-transform:uppercase;
+  }
+
+  /* ================= STORY BLOCK ================= */
+  .story{
+    display:grid;
+    grid-template-columns:0.95fr 1.05fr;
+    gap:52px;
+    align-items:center;
+    max-width:1180px;
+    margin:0 auto 90px;
+  }
+
+  .story-media{
+    position:relative;
+    border-radius:var(--radius);
+    overflow:hidden;
+    border:1px solid var(--card-border);
+    box-shadow:0 30px 60px -20px rgba(0,0,0,.7);
+  }
+  .story-media img{
+    display:block;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    aspect-ratio:4/3;
+  }
+  .story-media::after{
+    content:"";
+    position:absolute; inset:0;
+    background:linear-gradient(180deg, rgba(0,0,0,0) 55%, rgba(0,0,0,.55) 100%);
+  }
+
+  .story-copy .eyebrow{ margin-bottom:4px; }
+  .story-copy h2{
+    font-size:clamp(26px,4vw,38px);
+    font-weight:700;
+    text-transform:uppercase;
+    line-height:1.15;
+    margin-bottom:18px;
+  }
+  .story-copy p{
+    color:var(--text-dim);
+    font-size:15px;
+    line-height:1.75;
+    margin-bottom:18px;
+  }
+  .story-list{
+    list-style:none;
+    display:grid;
+    gap:11px;
+    margin-bottom:20px;
+  }
+  .story-list li{
+    display:flex;
+    align-items:flex-start;
+    gap:10px;
+    font-size:14.5px;
+    color:var(--text);
+  }
+  .story-list li svg{ flex:none; margin-top:2px; }
+  .story-tag{
+    font-size:14px;
+    color:var(--text-faint);
+    line-height:1.7;
+    border-top:1px solid var(--card-border);
+    padding-top:16px;
+  }
+
+  /* ================= STATS STRIP ================= */
+  .stats-wrap{
+    max-width:1180px;
+    margin:0 auto 100px;
+  }
+  .stats-title{
+    text-align:center;
+    font-size:clamp(18px,3vw,24px);
+    font-weight:600;
+    text-transform:uppercase;
+    letter-spacing:.04em;
+    margin-bottom:30px;
+  }
+  .stats-grid{
+    display:grid;
+    grid-template-columns:repeat(6,1fr);
+    gap:14px;
+  }
+  .stat-card{
+    border-radius:14px;
+    overflow:hidden;
+    line-height:0;
+    transition:transform .25s ease;
+  }
+  .stat-card:hover{ transform:translateY(-4px); }
+  .stat-card img{
+    display:block;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    aspect-ratio:1/1;
+  }
+
+  /* ================= TEAM ================= */
+  .team-wrap{ max-width:1000px; margin:0 auto 100px; }
+  .team-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:24px;
+  }
+  .team-card{
+    background:var(--bg-panel);
+    border:1px solid var(--card-border);
+    border-radius:var(--radius);
+    padding:30px 26px;
+    text-align:center;
+  }
+  .avatar{
+    width:96px; height:96px;
+    border-radius:50%;
+    margin:0 auto 16px;
+    background:linear-gradient(160deg,#3a3232,#1a1414);
+    border:2px solid var(--red-dark);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .team-role{
+    font-size:11.5px;
+    letter-spacing:.18em;
+    color:var(--red);
+    font-weight:600;
+    margin-bottom:6px;
+  }
+  .team-name{
+    font-family:'Oswald',sans-serif;
+    font-size:19px;
+    font-style:italic;
+    margin-bottom:12px;
+  }
+  .team-quote{
+    font-size:13.5px;
+    color:var(--text-dim);
+    font-style:italic;
+    border-top:1px solid var(--card-border);
+    padding-top:12px;
+  }
+
+  /* ================= VISION / MISSION ================= */
+  .vm-wrap{ max-width:1000px; margin:0 auto 100px; }
+  .vm-title{
+    text-align:center;
+    font-size:clamp(20px,3vw,26px);
+    font-weight:700;
+    text-transform:uppercase;
+    margin-bottom:30px;
+  }
+  .vm-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:24px;
+  }
+  .vm-card{
+    position:relative;
+    border-radius:var(--radius);
+    overflow:hidden;
+    border:1px solid var(--card-border);
+    box-shadow:0 20px 45px -18px rgba(0,0,0,.7);
+    line-height:0;
+  }
+  .vm-card img{
+    display:block;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    aspect-ratio:16/9;
+    transition:transform .4s ease;
+  }
+  .vm-card:hover img{ transform:scale(1.03); }
+
+  /* ================= WHY TRUST ================= */
+  .trust-wrap{ max-width:1180px; margin:0 auto 100px; }
+  .trust-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:16px;
+  }
+  .trust-card{
+    background:var(--bg-panel);
+    border:1px solid var(--card-border);
+    border-radius:14px;
+    padding:22px 16px;
+    display:flex;
+    align-items:center;
+    gap:14px;
+  }
+  .trust-icon{
+    flex:none;
+    width:40px;height:40px;
+    border-radius:10px;
+    background:rgba(226,19,31,.12);
+    display:flex;align-items:center;justify-content:center;
+  }
+  .trust-card span{
+    font-size:13px;
+    color:var(--text);
+    line-height:1.4;
+  }
+
+  /* ================= TESTIMONIALS ================= */
+  .test-wrap{ max-width:1180px; margin:0 auto 100px; }
+  .test-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+  }
+  .test-card{
+    background:var(--bg-panel);
+    border:1px solid var(--card-border);
+    border-radius:var(--radius);
+    padding:26px 24px;
+  }
+  .stars{ color:var(--red); font-size:14px; letter-spacing:2px; margin-bottom:14px; }
+  .test-card p{
+    font-size:13.5px;
+    color:var(--text-dim);
+    line-height:1.7;
+    margin-bottom:16px;
+  }
+  .test-name{ font-size:13px; font-weight:600; color:var(--text); }
+
+  /* ================= CTA BAR ================= */
+  .cta-bar{
+    position:relative;
+    margin-top:20px;
+    padding:0;
+    background:
+      linear-gradient(100deg, rgba(8,3,3,.98) 0%, rgba(55,6,9,.96) 45%, rgba(120,10,14,.92) 100%),
+      url('image/background image.png');
+    background-repeat:no-repeat;
+    background-position:center, right center;
+    background-size:cover, cover;
+    overflow:hidden;
+    border-top:1px solid rgba(255,255,255,.08);
+  }
+  .cta-inner{
+    position:relative; z-index:1;
+    max-width:1400px;
+    margin:0 auto;
+    display:flex;
+    flex-wrap:wrap;
+    align-items:stretch;
+  }
+  .cta-heading{
+    flex:1.15 1 300px;
+    padding:30px 40px;
+    border-right:1px solid rgba(255,255,255,.14);
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+  }
+  .cta-heading h3{
+    font-size:clamp(19px,2.3vw,25px);
+    line-height:1.25;
+    text-transform:uppercase;
+    margin-bottom:8px;
+  }
+  .cta-heading p{
+    font-size:13px;
+    color:#e3c9c9;
+    max-width:320px;
+    line-height:1.6;
+  }
+  .cta-items{
+    flex:2.4 1 640px;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+  }
+  .cta-item{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:22px 22px;
+    border-right:1px solid rgba(255,255,255,.14);
+  }
+  .cta-item:last-child{ border-right:none; }
+  .cta-icon{
+    flex:none;
+    width:42px;height:42px;
+    border-radius:50%;
+    background:var(--red);
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 6px 16px -4px rgba(226,19,31,.6);
+  }
+  .cta-item strong{
+    display:block;
+    font-family:'Oswald',sans-serif;
+    font-size:13px;
+    font-weight:600;
+    letter-spacing:.03em;
+    text-transform:uppercase;
+    margin-bottom:5px;
+    white-space:nowrap;
+  }
+  .cta-item span{
+    display:block;
+    font-size:12px;
+    color:#e9c9c9;
+    line-height:1.45;
+  }
+
+  /* ============ shared svg sizing ============ */
+  .about-section svg, .cta-bar svg{ display:block; }
+
+  /* ================= RESPONSIVE (ABOUT) ================= */
+  @media (max-width: 980px){
+    .stats-grid{ grid-template-columns:repeat(3,1fr); }
+    .trust-grid{ grid-template-columns:repeat(2,1fr); }
+    .test-grid{ grid-template-columns:1fr; }
+    .cta-items{ grid-template-columns:repeat(2,auto); }
+  }
+
+  @media (max-width: 840px){
+    .story{ grid-template-columns:1fr; gap:30px; }
+    .story-media img{ aspect-ratio:16/10; }
+  }
+
+  @media (max-width: 640px){
+    .about-section{ padding:60px 5vw 0; }
+    .team-grid{ grid-template-columns:1fr; }
+    .vm-grid{ grid-template-columns:1fr; }
+    .stats-grid{ grid-template-columns:repeat(2,1fr); }
+    .trust-grid{ grid-template-columns:1fr; }
+    .cta-inner{ flex-direction:column; }
+    .cta-heading{ border-right:none; border-bottom:1px solid rgba(255,255,255,.14); width:100%; }
+    .cta-items{ grid-template-columns:1fr 1fr; }
+    .cta-item{ border-bottom:1px solid rgba(255,255,255,.14); }
+    .cta-item:nth-child(2n){ border-right:none; }
+    .stat-card{ padding:18px 10px; }
+  }
+
+  @media (max-width: 420px){
+    .cta-items{ grid-template-columns:1fr; }
+    .cta-item{ border-right:none !important; }
+    .stats-grid{ grid-template-columns:1fr 1fr; }
   }
 </style>
 </head>
@@ -526,13 +985,13 @@
       <ul class="nav-links">
         <li><a href="#" class="active">Home</a></li>
         <li><a href="#">About Us</a></li>
-        <li><a href="#">Spare Parts</a></li>
         <li><a href="#">Services</a></li>
         <li><a href="#">Gallery</a></li>
         <li><a href="#">Contact Us</a></li>
       </ul>
     </nav>
 
+    <!-- Desktop Call Box -->
     <a href="tel:8754334359" class="call-box">
       <span class="icon-circle">
         <svg viewBox="0 0 24 24"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.4.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.4 0 .8-.3 1L6.6 10.8z"/></svg>
@@ -543,9 +1002,16 @@
       </span>
     </a>
 
-    <button class="burger" id="burgerBtn" aria-label="Open menu">
-      <span></span><span></span><span></span>
-    </button>
+    <!-- Mobile Action Buttons -->
+    <div class="mobile-actions">
+      <div class="status-badge" id="statusBadge">
+        <span class="dot"></span>
+        <span class="status-text" id="statusText">Checking...</span>
+      </div>
+      <button class="burger" id="burgerBtn" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
   </div>
 </div>
 
@@ -560,7 +1026,6 @@
   <nav class="mobile-nav-links">
     <a href="#" class="active">Home</a>
     <a href="#">About Us</a>
-    <a href="#">Spare Parts</a>
     <a href="#">Services</a>
     <a href="#">Gallery</a>
     <a href="#">Contact Us</a>
@@ -600,6 +1065,213 @@
   <img src="image/banner.jpeg" alt="Trusted Source For Genuine Used Auto Spare Parts">
 </section>
 
+<!-- ============ ABOUT PAGE CONTENT ============ -->
+<section class="about-section">
+  <div class="inner">
+
+    <!-- ============ OUR STORY ============ -->
+    <div class="story">
+      <div class="story-media">
+        <img src="image/about image.png" alt="Muthu Auto Spares warehouse">
+      </div>
+      <div class="story-copy">
+        <span class="eyebrow">OUR STORY</span>
+        <h2>Our Journey <span class="accent">Since 2021</span></h2>
+        <p>Founded in 2021, Muthu Auto Spares &amp; Scrap Yard started with a simple mission — to make quality used auto spare parts affordable and accessible for everyone.</p>
+        <p>Over the years, we have grown into a trusted destination for vehicle owners, mechanics, and workshops by delivering:</p>
+        <ul class="story-list">
+          <li>
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#e2131f"/><path d="M5 9.2l2.4 2.4L13 6" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Genuine used spare parts
+          </li>
+          <li>
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#e2131f"/><path d="M5 9.2l2.4 2.4L13 6" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Affordable pricing
+          </li>
+          <li>
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#e2131f"/><path d="M5 9.2l2.4 2.4L13 6" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Reliable customer support
+          </li>
+          <li>
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#e2131f"/><path d="M5 9.2l2.4 2.4L13 6" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Quality-tested components
+          </li>
+        </ul>
+        <p class="story-tag">Today, we proudly serve customers across Tamil Nadu through our two physical yards and online order services.</p>
+      </div>
+    </div>
+
+    <!-- ============ NUMBERS ============ -->
+    <div class="stats-wrap">
+      <h3 class="stats-title">Our <span class="accent">Numbers</span> Speak For Us</h3>
+      <div class="stats-grid">
+
+        <div class="stat-card">
+          <img src="image/1st.png" alt="100,000+ Happy Customers">
+        </div>
+
+        <div class="stat-card">
+          <img src="image/2nd.png" alt="10,000+ Successful Engine Swaps">
+        </div>
+
+        <div class="stat-card">
+          <img src="image/3rd.png" alt="2 Auto Spare Yards">
+        </div>
+
+        <div class="stat-card">
+          <img src="image/4th.png" alt="350K+ Followers Across Digital Platforms">
+        </div>
+
+        <div class="stat-card">
+          <img src="image/5th.png" alt="Online Orders Available Across India">
+        </div>
+
+        <div class="stat-card">
+          <img src="image/6th.png" alt="Since 2021">
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ============ TEAM ============ -->
+    <div class="team-wrap">
+      <div class="section-head">
+        <h2>Meet The People Behind <span class="accent">Our Success</span></h2>
+        <div class="divider"></div>
+      </div>
+      <div class="team-grid">
+        <div class="team-card">
+          <div class="avatar">
+            <svg width="42" height="42" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="#726867" stroke-width="1.4"/><path d="M4 20c0-4 3.6-6 8-6s8 2 8 6" stroke="#726867" stroke-width="1.4"/></svg>
+          </div>
+          <div class="team-role">FOUNDER &amp; OWNER</div>
+          <div class="team-name">Muthu Raj B</div>
+          <p style="font-size:12px;color:var(--text-faint);margin-bottom:12px;">Founder of Muthu Auto Spares &amp; Scrap Yard, leading the business with a vision of providing genuine used spare parts and trustworthy service to every customer.</p>
+          <p class="team-quote">"Trust is built through quality and honest service."</p>
+        </div>
+        <div class="team-card">
+          <div class="avatar">
+            <svg width="42" height="42" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="#726867" stroke-width="1.4"/><path d="M4 20c0-4 3.6-6 8-6s8 2 8 6" stroke="#726867" stroke-width="1.4"/></svg>
+          </div>
+          <div class="team-role">CO-FOUNDER / BUSINESS PARTNER</div>
+          <div class="team-name">Madhan B</div>
+          <p style="font-size:12px;color:var(--text-faint);margin-bottom:12px;">Responsible for daily operations, inventory management, customer relationships, and ensuring smooth service delivery.</p>
+          <p class="team-quote">"Every customer deserves the right part at the right price."</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ VISION / MISSION ============ -->
+    <div class="vm-wrap">
+      <div class="vm-title">Our <span class="accent">Vision</span> &amp; Mission</div>
+      <div class="vm-grid">
+        <div class="vm-card">
+          <img src="image/vision.png" alt="Our Vision — To become Tamil Nadu's most trusted destination for genuine used auto spare parts and engine solutions.">
+        </div>
+        <div class="vm-card">
+          <img src="image/mission.png" alt="Our Mission — To provide quality-tested spare parts, affordable prices, and dependable service that keeps every vehicle moving.">
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ WHY TRUST US ============ -->
+    <div class="trust-wrap">
+      <div class="section-head">
+        <h2>Why Thousands Trust <span class="accent">Muthu Auto Spares</span></h2>
+        <div class="divider"></div>
+      </div>
+      <div class="trust-grid">
+        <div class="trust-card">
+          <div class="trust-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 3l7 3v5.5c0 4.7-3 8.2-7 9.5-4-1.3-7-4.8-7-9.5V6l7-3z" stroke="#e2131f" stroke-width="1.5" stroke-linejoin="round"/><path d="M9 12.2l2 2 4-4.4" stroke="#e2131f" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <span>Genuine Used Spare Parts</span>
+        </div>
+        <div class="trust-card">
+          <div class="trust-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M11.2 3.2l8 8a1.6 1.6 0 010 2.3l-6 6a1.6 1.6 0 01-2.3 0l-8-8V4a.8.8 0 01.8-.8h7.5z" stroke="#e2131f" stroke-width="1.5" stroke-linejoin="round"/><circle cx="7.3" cy="7.3" r="1.4" fill="#e2131f"/></svg></div>
+          <span>Affordable Pricing</span>
+        </div>
+        <div class="trust-card">
+          <div class="trust-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4 21V6a1 1 0 011-1h6a1 1 0 011 1v15" stroke="#e2131f" stroke-width="1.5" stroke-linejoin="round"/><path d="M2 21h13M12 10h2.3l2.9 2.9V19a1 1 0 01-1 1H12" stroke="#e2131f" stroke-width="1.5" stroke-linejoin="round"/><path d="M6.5 8.5h2.5" stroke="#e2131f" stroke-width="1.4" stroke-linecap="round"/><circle cx="16.3" cy="19" r="1.3" stroke="#e2131f" stroke-width="1.3"/></svg></div>
+          <span>Diesel &amp; Petrol Spare Parts Available</span>
+        </div>
+        <div class="trust-card">
+          <div class="trust-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M20 11A8 8 0 106.3 17.7" stroke="#e2131f" stroke-width="1.5" stroke-linecap="round"/><path d="M20 6v5h-5" stroke="#e2131f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 9v4l3 1.6" stroke="#e2131f" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <span>3-Day Replacement Guarantee</span>
+        </div>
+        <div class="trust-card">
+          <div class="trust-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 8.5a3.5 3.5 0 100 7 3.5 3.5 0 000-7z" stroke="#e2131f" stroke-width="1.5"/><path d="M12 2.5v2.4M12 19.1v2.4M4.9 4.9l1.7 1.7M17.4 17.4l1.7 1.7M19.1 6.6l-1.7 1.7M6.6 17.4l-1.7 1.7M2.5 12h2.4M19.1 12h2.4" stroke="#e2131f" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+          <span>1,000+ Successful Engine Swap Stories</span>
+        </div>
+        <div class="trust-card">
+          <div class="trust-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4 20V10.5a1 1 0 01.45-.83L11.45 5a1 1 0 011.1 0l7 4.67a1 1 0 01.45.83V20" stroke="#e2131f" stroke-width="1.5" stroke-linejoin="round"/><path d="M2 20h20M9 20v-5.5h6V20" stroke="#e2131f" stroke-width="1.5" stroke-linejoin="round"/></svg></div>
+          <span>Two Physical Yards &amp; Online Orders</span>
+        </div>
+        <div class="trust-card">
+          <div class="trust-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="10" r="6.3" stroke="#e2131f" stroke-width="1.5"/><path d="M9.3 10.1l1.8 1.8 3.6-3.9" stroke="#e2131f" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M9 15.6l-1.4 5.2 4.4-2.4 4.4 2.4-1.4-5.2" stroke="#e2131f" stroke-width="1.4" stroke-linejoin="round"/></svg></div>
+          <span>Quality Tested Parts</span>
+        </div>
+        <div class="trust-card">
+          <div class="trust-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 20.5s-7.3-4.3-7.3-9.8A4 4 0 0112 8.3a4 4 0 017.3 2.4c0 5.5-7.3 9.8-7.3 9.8z" stroke="#e2131f" stroke-width="1.5" stroke-linejoin="round"/></svg></div>
+          <span>Customer-First Service</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ TESTIMONIALS ============ -->
+    <div class="test-wrap">
+      <div class="section-head">
+        <h2>What Our <span class="accent">Customers</span> Say</h2>
+        <div class="divider"></div>
+      </div>
+      <div class="test-grid">
+        <div class="test-card">
+          <div class="stars">★★★★★</div>
+          <p>Wide range of genuine used parts. Best place for engine and body parts. Quality and service are excellent!</p>
+          <div class="test-name">– Ramesh, Coimbatore</div>
+        </div>
+        <div class="test-card">
+          <div class="stars">★★★★★</div>
+          <p>I found a perfect engine for my car. 3-day replacement guarantee gives so much confidence.</p>
+          <div class="test-name">– Suresh, Erode</div>
+        </div>
+        <div class="test-card">
+          <div class="stars">★★★★★</div>
+          <p>Online order was easy and delivery was on time. Highly recommended!</p>
+          <div class="test-name">– Karthik, Chennai</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ CTA BAR ============ -->
+<section class="cta-bar">
+  <div class="cta-inner">
+    <div class="cta-heading">
+      <h3>Need The Right Spare Part?</h3>
+      <p>Whether you're looking for an engine, gearbox, body parts, or accessories, our team is ready to help.</p>
+    </div>
+    <div class="cta-items">
+      <div class="cta-item">
+        <div class="cta-icon"><svg width="19" height="19" viewBox="0 0 24 24" fill="none"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3 19.5 19.5 0 01-6-6 19.8 19.8 0 01-3-8.7A2 2 0 014.1 2h3a2 2 0 012 1.7c.1.9.3 1.8.6 2.7a2 2 0 01-.5 2.1L8 9.7a16 16 0 006 6l1.2-1.2a2 2 0 012.1-.5c.9.3 1.8.5 2.7.6a2 2 0 011.7 2z" fill="#fff"/></svg></div>
+        <div><strong>Call Us Today</strong><span>87543 34359<br>01502 22114</span></div>
+      </div>
+      <div class="cta-item">
+        <div class="cta-icon"><svg width="19" height="19" viewBox="0 0 24 24" fill="none"><path d="M12 22s7-6.3 7-12a7 7 0 10-14 0c0 5.7 7 12 7 12z" fill="#fff"/><circle cx="12" cy="10" r="2.3" fill="#e2131f"/></svg></div>
+        <div><strong>Visit Our Yards</strong><span>Mettupalayam Main Road,<br>Avinashi, Tirupur - 641654</span></div>
+      </div>
+      <div class="cta-item">
+        <div class="cta-icon"><svg width="19" height="19" viewBox="0 0 24 24" fill="none"><path d="M3 21l1.6-4.7A8.5 8.5 0 1112 20.5c-1.5 0-2.9-.4-4.1-1L3 21z" fill="#fff"/></svg></div>
+        <div><strong>Order Via WhatsApp</strong><span>Quick response and<br>easy ordering</span></div>
+      </div>
+      <div class="cta-item">
+        <div class="cta-icon"><svg width="19" height="19" viewBox="0 0 24 24" fill="none"><path d="M3 7l9-4 9 4-9 4-9-4z" fill="#fff"/><path d="M3 7v10l9 4 9-4V7" stroke="#fff" stroke-width="1.4" stroke-linejoin="round" fill="none"/></svg></div>
+        <div><strong>Pan-India Delivery</strong><span>Online orders available<br>across India</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <script>
   const burgerBtn = document.getElementById('burgerBtn');
   const menuCloseBtn = document.getElementById('menuCloseBtn');
@@ -628,6 +1300,26 @@
   document.querySelectorAll('.mobile-nav-links a').forEach(link => {
     link.addEventListener('click', closeMenu);
   });
+
+  // ===== STORE OPEN/CLOSED STATUS =====
+  // Hours: Mon-Sat 9:30 AM - 8:00 PM, Sunday closed
+  function updateStoreStatus(){
+    const badge = document.getElementById('statusBadge');
+    const text = document.getElementById('statusText');
+    const now = new Date();
+    const day = now.getDay(); // 0 = Sunday
+    const minutes = now.getHours() * 60 + now.getMinutes();
+    const openTime = 9 * 60 + 30;
+    const closeTime = 20 * 60;
+
+    const isOpen = day !== 0 && minutes >= openTime && minutes < closeTime;
+
+    badge.classList.toggle('is-open', isOpen);
+    badge.classList.toggle('is-closed', !isOpen);
+    text.textContent = isOpen ? 'Open Now' : 'Closed';
+  }
+  updateStoreStatus();
+  setInterval(updateStoreStatus, 60000);
 </script>
 
 </body>
