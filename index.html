@@ -595,10 +595,9 @@
 
   /* ================= STORY BLOCK ================= */
   .story{
-    display:grid;
-    grid-template-columns:0.95fr 1.05fr;
-    gap:52px;
-    align-items:center;
+    display:flex;
+    flex-direction:column;
+    gap:36px;
     max-width:1180px;
     margin:0 auto 90px;
   }
@@ -615,7 +614,7 @@
     width:100%;
     height:100%;
     object-fit:cover;
-    aspect-ratio:4/3;
+    aspect-ratio:21/9;
   }
   .story-media::after{
     content:"";
@@ -910,7 +909,7 @@
   }
 
   @media (max-width: 840px){
-    .story{ grid-template-columns:1fr; gap:30px; }
+    .story{ gap:26px; }
     .story-media img{ aspect-ratio:16/10; }
   }
 
@@ -1071,9 +1070,6 @@
 
     <!-- ============ OUR STORY ============ -->
     <div class="story">
-      <div class="story-media">
-        <img src="image/about image.png" alt="Muthu Auto Spares warehouse">
-      </div>
       <div class="story-copy">
         <span class="eyebrow">OUR STORY</span>
         <h2>Our Journey <span class="accent">Since 2021</span></h2>
@@ -1098,6 +1094,9 @@
           </li>
         </ul>
         <p class="story-tag">Today, we proudly serve customers across Tamil Nadu through our two physical yards and online order services.</p>
+      </div>
+      <div class="story-media">
+        <img src="image/about image.png" alt="Muthu Auto Spares warehouse">
       </div>
     </div>
 
