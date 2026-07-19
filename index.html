@@ -483,15 +483,22 @@
       gap: 0;
     }
     
-    /* Clean Logo Integration */
+    /* Clean Logo Integration - logo shown as background image on mobile */
     .logo {
-      padding: 0;
-      background: transparent;
+      padding: 10px;
+      background-image: url('image/logo.png');
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: contain;
+      width: 150px;
+      height: 100%;
       border: none;
     }
     .logo img {
-      height: 44px; /* Perfectly sized to fit vertically */
-      width: auto;
+      opacity: 0;
+      visibility: hidden;
+      width: 150px;
+      height: 44px; /* reserves layout space, keeps alt text for accessibility */
     }
 
     /* Right side actions wrapper */
@@ -524,7 +531,8 @@
 
   @media (max-width: 380px) {
     .navbar-inner { height: 64px; padding: 0 12px; }
-    .logo img { height: 38px; }
+    .logo { padding: 8px; width: 120px; }
+    .logo img { height: 38px; width: 120px; }
     .mobile-actions { gap: 8px; }
     .burger { width: 38px; height: 38px; flex-basis: 38px; }
     .status-badge { height: 36px; padding: 0 9px; }
@@ -933,6 +941,226 @@
     .stats-grid{ grid-template-columns:1fr 1fr; }
   }
 </style>
+
+<style>
+/* ================= CONTACT PAGE (SCOPED) ================= */
+
+  :root{
+    --cpbg: #0a0a0a;
+    --cppanel: #121212;
+    --cppanel-border: #262626;
+    --cpred: #e0121a;
+    --cptext: #f2f2f2;
+    --cpmuted: #9a9a9a;
+  }
+  #contact-page *{box-sizing:border-box;}
+  #contact-page{
+    background:var(--cpbg);
+    color:var(--cptext);
+    font-family:'Segoe UI', Arial, sans-serif;
+    padding:32px 16px 48px;
+    line-height:1.4;
+  }
+  .cp-wrap{max-width:1400px;margin:0 auto;}
+  #contact-page a{max-width:100%;}
+  #contact-page img{max-width:100%;}
+
+  /* Heading */
+  .cp-heading{text-align:center;margin-bottom:28px;}
+  .cp-eyebrow{
+    color:var(--cpred);
+    font-weight:700;
+    letter-spacing:2px;
+    font-size:13px;
+    display:flex;align-items:center;justify-content:center;gap:12px;
+    margin-bottom:10px;
+  }
+  .cp-eyebrow::before,.cp-eyebrow::after{
+    content:"";width:40px;height:2px;background:var(--cpred);
+  }
+  .cp-heading h1{
+    font-size:clamp(30px,6vw,52px);
+    letter-spacing:1.5px;
+    font-weight:800;
+    line-height:1.1;
+  }
+  .cp-heading h1 span{color:var(--cpred);}
+  .cp-heading p{color:var(--cpmuted);margin-top:10px;font-size:14px;max-width:520px;margin-left:auto;margin-right:auto;}
+
+  /* Top info bar */
+  .cp-info-bar{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    border:1px solid var(--cppanel-border);
+    border-radius:14px;
+    background:var(--cppanel);
+    padding:22px 10px;
+    margin-bottom:24px;
+  }
+  .cp-info-item{
+    display:flex;
+    align-items:flex-start;
+    gap:14px;
+    padding:0 20px;
+    border-right:1px solid var(--cppanel-border);
+    min-width:0;
+  }
+  .cp-info-item:last-child{border-right:none;}
+  .cp-icon-circle{
+    width:48px;height:48px;min-width:48px;
+    border:2px solid var(--cpred);border-radius:50%;
+    display:flex;align-items:center;justify-content:center;color:var(--cpred);
+  }
+  .cp-icon-circle svg{width:22px;height:22px;}
+  .cp-info-item .cp-info-text{min-width:0;}
+  .cp-info-item h4{font-size:12.5px;letter-spacing:0.8px;color:#e8e8e8;margin-bottom:6px;white-space:nowrap;}
+  .cp-info-item .cp-highlight{color:var(--cpred);}
+  .cp-info-item p, .cp-info-item a{font-size:13.5px;color:var(--cpmuted);line-height:1.55;text-decoration:none;display:block;}
+  .cp-info-item a:hover{color:var(--cpred);}
+
+  /* Main grid */
+  .cp-main-grid{
+    display:grid;
+    grid-template-columns:1fr 1.15fr 1fr;
+    gap:20px;
+    align-items:start;
+  }
+  .cp-panel{
+    background:var(--cppanel);
+    border:1px solid var(--cppanel-border);
+    border-radius:14px;
+    padding:24px;
+    min-width:0;
+  }
+  .cp-panel h2{
+    font-size:19px;letter-spacing:0.5px;font-weight:800;margin-bottom:14px;
+  }
+  .cp-panel h2 span{color:var(--cpred);}
+  .cp-underline{
+    width:36px;height:3px;background:var(--cpred);margin-bottom:18px;
+  }
+
+  /* Locations */
+  .cp-location-block{margin-bottom:18px;padding-bottom:18px;border-bottom:1px solid var(--cppanel-border);}
+  .cp-location-block:last-of-type{border-bottom:none;margin-bottom:14px;}
+  .cp-loc-title{display:flex;align-items:center;gap:7px;color:var(--cpred);font-weight:700;font-size:13px;letter-spacing:0.5px;margin-bottom:8px;}
+  .cp-loc-title svg{width:15px;height:15px;flex-shrink:0;}
+  .cp-location-block p{color:#d8d8d8;font-size:13.5px;line-height:1.6;margin-bottom:12px;}
+  .cp-btn-outline{
+    display:inline-flex;align-items:center;gap:7px;
+    border:1px solid var(--cpred);color:var(--cpred);
+    padding:9px 16px;border-radius:6px;font-size:11.5px;font-weight:700;
+    text-decoration:none;letter-spacing:0.4px;white-space:nowrap;
+    transition:background .2s ease,color .2s ease;
+  }
+  .cp-btn-outline svg{flex-shrink:0;width:14px;height:14px;}
+  .cp-btn-outline:hover{background:var(--cpred);color:#fff;}
+  .cp-map-embed{
+    border-radius:10px;overflow:hidden;border:1px solid var(--cppanel-border);margin-top:4px;
+    aspect-ratio:16/9;
+  }
+  .cp-map-embed iframe{width:100%;height:100%;border:0;display:block;}
+  .cp-map-open-btn{
+    display:flex;align-items:center;justify-content:center;gap:8px;
+    background:var(--cpred);color:#fff;text-decoration:none;
+    font-weight:700;font-size:12.5px;letter-spacing:0.5px;
+    padding:13px;margin-top:10px;border-radius:8px;
+  }
+  .cp-map-open-btn svg{width:15px;height:15px;flex-shrink:0;}
+  .cp-map-open-btn:hover{background:#b70e14;}
+
+  /* Form */
+  .cp-form-group{margin-bottom:12px;}
+  .cp-input-wrap{
+    display:flex;align-items:center;gap:10px;
+    background:#181818;border:1px solid var(--cppanel-border);
+    border-radius:8px;padding:12px 14px;
+  }
+  .cp-input-wrap svg{width:16px;height:16px;color:var(--cpmuted);flex-shrink:0;}
+  .cp-input-wrap input, .cp-input-wrap textarea{
+    background:transparent;border:none;outline:none;
+    color:var(--cptext);font-size:14px;width:100%;font-family:inherit;
+    resize:vertical;
+  }
+  .cp-input-wrap textarea{min-height:84px;padding-top:4px;}
+  .cp-input-wrap input::placeholder, .cp-input-wrap textarea::placeholder{color:#777;}
+  .cp-send-btn{
+    width:100%;background:var(--cpred);color:#fff;border:none;
+    padding:14px;border-radius:8px;font-weight:700;letter-spacing:1px;
+    font-size:13.5px;display:flex;align-items:center;justify-content:center;gap:10px;
+    cursor:pointer;margin-top:4px;transition:background .2s ease;
+  }
+  .cp-send-btn:hover{background:#b70e14;}
+  .cp-send-btn svg{width:16px;height:16px;}
+
+  /* Why choose us */
+  .cp-reason{display:flex;gap:14px;padding:14px 0;border-bottom:1px solid var(--cppanel-border);}
+  .cp-reason:last-of-type{border-bottom:none;}
+  .cp-reason .cp-icon-circle{width:44px;height:44px;min-width:44px;}
+  .cp-reason h4{color:var(--cpred);font-size:14px;margin-bottom:4px;letter-spacing:0.3px;}
+  .cp-reason p{color:var(--cpmuted);font-size:12.5px;line-height:1.5;}
+
+  .cp-follow{margin-top:20px;}
+  .cp-follow h4{font-size:13px;letter-spacing:1px;margin-bottom:14px;}
+  .cp-social-row{display:flex;gap:10px;}
+  .cp-social-row a{
+    width:40px;height:40px;min-width:40px;border:1px solid var(--cpred);border-radius:50%;
+    display:flex;align-items:center;justify-content:center;color:var(--cpred);
+    text-decoration:none;transition:all .2s ease;
+  }
+  .cp-social-row a:hover{background:var(--cpred);color:#fff;}
+  .cp-social-row svg{width:17px;height:17px;}
+
+  /* Footer bar */
+  .cp-footer-bar{
+    margin-top:20px;
+    border:1px solid var(--cppanel-border);border-radius:14px;
+    background:
+      linear-gradient(rgba(10,10,10,0.78), rgba(10,10,10,0.78)),
+      url('image/logo.png') center / cover no-repeat;
+    display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:24px;
+    padding:32px 40px;
+    min-height:96px;
+    position:relative;
+    overflow:hidden;
+  }
+  .cp-footer-left{display:flex;align-items:center;gap:14px;min-width:0;}
+  .cp-footer-left .cp-icon-circle{border-radius:10px;background:var(--cpred);color:#fff;border:none;}
+  .cp-footer-left a{color:var(--cpred);text-decoration:none;font-weight:700;font-size:13.5px;}
+  .cp-footer-left p{font-size:12.5px;color:#ccc;margin-bottom:3px;}
+  .cp-footer-right{text-align:right;}
+  .cp-footer-right p{font-size:12.5px;color:#ccc;line-height:1.5;}
+  .cp-footer-right .cp-highlight{color:var(--cpred);font-weight:700;}
+
+  /* ===================== RESPONSIVE ===================== */
+  @media(max-width:1080px){
+    .cp-main-grid{grid-template-columns:1fr;}
+  }
+
+  @media(max-width:820px){
+    .cp-info-bar{grid-template-columns:1fr 1fr;gap:20px 12px;row-gap:22px;}
+    .cp-info-item{border-right:none;padding:0 4px;}
+    .cp-info-item:nth-child(odd){border-right:1px solid var(--cppanel-border);}
+    .cp-footer-bar{grid-template-columns:1fr;text-align:center;gap:16px;}
+    .cp-footer-left{justify-content:center;}
+    .cp-footer-right{text-align:center;}
+  }
+
+  @media(max-width:560px){
+    #contact-page{padding:24px 12px 36px;}
+    .cp-info-bar{grid-template-columns:1fr;padding:20px 16px;gap:18px;}
+    .cp-info-item{border-right:none !important;padding:0;border-bottom:1px solid var(--cppanel-border);padding-bottom:16px;}
+    .cp-info-item:last-child{border-bottom:none;padding-bottom:0;}
+    .cp-info-item h4{white-space:normal;}
+    .cp-panel{padding:20px 18px;}
+  }
+
+  @media(max-width:400px){
+    .cp-heading h1{font-size:28px;}
+    .cp-eyebrow::before,.cp-eyebrow::after{width:26px;}
+  }
+
+</style>
 </head>
 <body>
 
@@ -986,7 +1214,7 @@
         <li><a href="#">About Us</a></li>
         <li><a href="https://servicemuthuautospares.netlify.app/" target="_blank" rel="noopener">Services</a></li>
         <li><a href="#">Gallery</a></li>
-        <li><a href="#">Contact Us</a></li>
+        <li><a href="#contact-page">Contact Us</a></li>
       </ul>
     </nav>
 
@@ -1027,7 +1255,7 @@
     <a href="#">About Us</a>
     <a href="https://servicemuthuautospares.netlify.app/" target="_blank" rel="noopener">Services</a>
     <a href="#">Gallery</a>
-    <a href="#">Contact Us</a>
+    <a href="#contact-page">Contact Us</a>
   </nav>
 
   <a href="tel:8754334359" class="mobile-menu-call">
@@ -1270,6 +1498,228 @@
     </div>
   </div>
 </section>
+
+<section id="contact-page">
+
+<div class="cp-wrap">
+
+  <!-- Heading -->
+  <div class="cp-heading">
+    <div class="cp-eyebrow">GET IN TOUCH</div>
+    <h1>CONTACT <span>US</span></h1>
+    <p>We are always here to help you. Reach out for any inquiries or requirements.</p>
+  </div>
+
+  <!-- Info bar -->
+  <div class="cp-info-bar">
+    <div class="cp-info-item">
+      <div class="cp-icon-circle">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.81.34 1.6.65 2.34a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.74-1.24a2 2 0 0 1 2.11-.45c.74.31 1.53.53 2.34.65A2 2 0 0 1 22 16.92z"/></svg>
+      </div>
+      <div class="cp-info-text">
+        <h4>PHONE NUMBERS</h4>
+        <a href="tel:+918754334359">87543 34359</a>
+        <a href="tel:+919150222114">91502 22114</a>
+      </div>
+    </div>
+    <div class="cp-info-item">
+      <div class="cp-icon-circle">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg>
+      </div>
+      <div class="cp-info-text">
+        <h4>EMAIL ADDRESS</h4>
+        <a href="mailto:muthuautospares@gmail.com" style="word-break:break-all;">muthuautospares@gmail.com</a>
+      </div>
+    </div>
+    <div class="cp-info-item">
+      <div class="cp-icon-circle">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+      </div>
+      <div class="cp-info-text">
+        <h4>WORKING HOURS</h4>
+        <p class="cp-highlight">Mon - Sat : 9.00 AM - 8.00 PM</p>
+        <p>Sunday Closed</p>
+      </div>
+    </div>
+    <div class="cp-info-item">
+      <div class="cp-icon-circle">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+      </div>
+      <div class="cp-info-text">
+        <h4 style="white-space:normal;">ONLINE ORDERS <span class="cp-highlight">AVAILABLE</span></h4>
+        <p>Easy ordering, fast delivery right to your doorstep.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main grid -->
+  <div class="cp-main-grid">
+
+    <!-- Locations -->
+    <div class="cp-panel">
+      <h2>OUR <span>LOCATIONS</span></h2>
+      <div class="cp-underline"></div>
+
+      <div class="cp-location-block">
+        <div class="cp-loc-title">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>
+          LOCATION 1
+        </div>
+        <p>Mettupalayam Main Road,<br>Avinashi, Tirupur (Dt) - 641 654</p>
+        <a class="cp-btn-outline" href="https://maps.app.goo.gl/r8AVcfzq4sQPXUSW9?g_st=ac" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>
+          VIEW ON MAP
+        </a>
+      </div>
+
+      <div class="cp-location-block">
+        <div class="cp-loc-title">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>
+          LOCATION 2
+        </div>
+        <p>Velliyampalayam,<br>Avinashi, Tirupur (Dt) - 641 654</p>
+        <a class="cp-btn-outline" href="https://maps.app.goo.gl/YCWim8DsgccRe34Y6?g_st=ac" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>
+          VIEW ON MAP
+        </a>
+      </div>
+
+      <div class="cp-map-embed">
+        <iframe loading="lazy" src="https://www.google.com/maps?q=11.1997687,77.2467619(Muthu+Auto+Spares)&z=15&output=embed"></iframe>
+      </div>
+      <a class="cp-map-open-btn" href="https://maps.app.goo.gl/r8AVcfzq4sQPXUSW9?g_st=ac" target="_blank" rel="noopener">
+        OPEN IN GOOGLE MAPS
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14 21 3"/></svg>
+      </a>
+    </div>
+
+    <!-- Inquiry form -->
+    <div class="cp-panel">
+      <h2>SEND US AN <span>INQUIRY</span></h2>
+      <div class="cp-underline"></div>
+      <form action="#" method="POST">
+        <div class="cp-form-group">
+          <div class="cp-input-wrap">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <input type="text" name="name" placeholder="Your Name" required>
+          </div>
+        </div>
+        <div class="cp-form-group">
+          <div class="cp-input-wrap">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.81.34 1.6.65 2.34a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.74-1.24a2 2 0 0 1 2.11-.45c.74.31 1.53.53 2.34.65A2 2 0 0 1 22 16.92z"/></svg>
+            <input type="tel" name="phone" placeholder="Your Phone" required>
+          </div>
+        </div>
+        <div class="cp-form-group">
+          <div class="cp-input-wrap">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg>
+            <input type="email" name="email" placeholder="Your Email" required>
+          </div>
+        </div>
+        <div class="cp-form-group">
+          <div class="cp-input-wrap">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m20.59 13.41-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><circle cx="7" cy="7" r="1"/></svg>
+            <input type="text" name="subject" placeholder="Subject">
+          </div>
+        </div>
+        <div class="cp-form-group">
+          <div class="cp-input-wrap" style="align-items:flex-start;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-top:4px;"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5z"/></svg>
+            <textarea name="message" placeholder="Your Message" required></textarea>
+          </div>
+        </div>
+        <button type="submit" class="cp-send-btn">
+          SEND MESSAGE
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+        </button>
+      </form>
+    </div>
+
+    <!-- Why choose us -->
+    <div class="cp-panel">
+      <h2>WHY CHOOSE <span>MUTHU AUTO SPARES?</span></h2>
+      <div class="cp-underline"></div>
+
+      <div class="cp-reason">
+        <div class="cp-icon-circle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <div>
+          <h4>350K+ FOLLOWERS</h4>
+          <p>Trusted by thousands across all platforms.</p>
+        </div>
+      </div>
+
+      <div class="cp-reason">
+        <div class="cp-icon-circle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div>
+          <h4>3-DAY REPLACEMENT GUARANTEE</h4>
+          <p>In case of mismatch or not working.</p>
+        </div>
+      </div>
+
+      <div class="cp-reason">
+        <div class="cp-icon-circle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="6"/><path d="M8.21 13.89 7 23l5-3 5 3-1.21-9.12"/></svg>
+        </div>
+        <div>
+          <h4>100% GENUINE PARTS</h4>
+          <p>Quality checked & performance tested.</p>
+        </div>
+      </div>
+
+      <div class="cp-reason">
+        <div class="cp-icon-circle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="M2 12h2"/><path d="M12 2a10 10 0 1 0 10 10"/><path d="m12 12 4-4"/></svg>
+        </div>
+        <div>
+          <h4>FAST & RELIABLE SERVICE</h4>
+          <p>We ensure the best service experience.</p>
+        </div>
+      </div>
+
+      <div class="cp-follow">
+        <h4>FOLLOW US ON</h4>
+        <div class="cp-social-row">
+          <a href="https://www.facebook.com/p/Muthus-Scrap-Yard-Avinashi-100083053610640/" target="_blank" rel="noopener" aria-label="Facebook">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.5 9.87v-6.98H7.9V12h2.6V9.8c0-2.6 1.55-4.03 3.92-4.03 1.13 0 2.32.2 2.32.2v2.55h-1.3c-1.29 0-1.69.8-1.69 1.62V12h2.88l-.46 2.89h-2.42v6.98A10 10 0 0 0 22 12z"/></svg>
+          </a>
+          <a href="https://www.instagram.com/muthu_auto_spares?igsh=MW1hMzVhczd3dXU2Mw==" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>
+          </a>
+          <a href="https://youtube.com/@muthuautospares?si=8eycVgnmFYaJVqfv" target="_blank" rel="noopener" aria-label="YouTube">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.42a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.42 8.6.42 8.6.42s6.88 0 8.6-.42a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.33 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg>
+          </a>
+          <a href="https://wa.me/918754334359" target="_blank" rel="noopener" aria-label="WhatsApp">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39a9.9 9.9 0 0 0 4.75 1.21h.01c5.46 0 9.9-4.45 9.9-9.9 0-2.65-1.03-5.13-2.9-7A9.82 9.82 0 0 0 12.04 2zm0 18.06h-.01a8.2 8.2 0 0 1-4.18-1.15l-.3-.18-3.14.82.84-3.06-.2-.31a8.2 8.2 0 0 1-1.26-4.37c0-4.53 3.69-8.22 8.24-8.22 2.2 0 4.27.86 5.82 2.42a8.17 8.17 0 0 1 2.41 5.81c0 4.54-3.7 8.24-8.22 8.24zm4.51-6.16c-.25-.12-1.47-.72-1.7-.81-.23-.08-.39-.12-.56.13-.17.24-.64.8-.78.97-.14.17-.29.19-.53.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.24-.02-.38.11-.5.11-.11.25-.29.37-.43.13-.15.17-.25.25-.42.08-.17.04-.31-.02-.43-.06-.12-.56-1.35-.77-1.85-.2-.48-.41-.42-.56-.42h-.48c-.17 0-.43.06-.66.31-.23.24-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.57.12.17 1.75 2.67 4.25 3.74.59.26 1.06.41 1.42.52.6.19 1.14.16 1.57.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.14-1.18-.07-.1-.23-.16-.48-.28z"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer bar -->
+  <div class="cp-footer-bar">
+    <div class="cp-footer-left">
+      <div class="cp-icon-circle">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.81.34 1.6.65 2.34a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.74-1.24a2 2 0 0 1 2.11-.45c.74.31 1.53.53 2.34.65A2 2 0 0 1 22 16.92z"/></svg>
+      </div>
+      <div>
+        <p>Have questions or need help?</p>
+        <a href="tel:+918754334359">Call now, we are happy to assist you!</a>
+      </div>
+    </div>
+    <div class="cp-footer-right">
+      <p>Your Trusted Partner for<br><span class="cp-highlight">Used Auto Parts & Scrap Solutions.</span></p>
+    </div>
+  </div>
+
+</div>
+
+</section>
+
 
 <script>
   const burgerBtn = document.getElementById('burgerBtn');
