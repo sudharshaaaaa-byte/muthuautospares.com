@@ -19,6 +19,8 @@
 
   *{margin:0;padding:0;box-sizing:border-box;}
 
+  html{scroll-behavior:smooth;}
+
   body{
     font-family:'Inter',sans-serif;
     background:var(--near-black);
@@ -445,6 +447,7 @@
     width:100%;
     overflow:hidden;
     background:var(--black);
+    scroll-margin-top:90px;
   }
   .hero img{
     width:100%;
@@ -564,6 +567,7 @@
     background-size:cover, cover;
     background-attachment:scroll;
     padding:80px 6vw 0;
+    scroll-margin-top:90px;
   }
 
   .about-section > .inner{ position:relative; z-index:1; }
@@ -714,7 +718,6 @@
     text-align:center;
   }
   .avatar{
-  width:280px; height:280px;
   border-radius:50%;
   margin:0 auto 20px;
   background:linear-gradient(160deg,#3a3232,#1a1414);
@@ -968,6 +971,7 @@
     font-family:'Segoe UI', Arial, sans-serif;
     padding:32px 16px 48px;
     line-height:1.4;
+    scroll-margin-top:90px;
   }
   .cp-wrap{max-width:1400px;margin:0 auto;}
   #contact-page a{max-width:100%;}
@@ -1212,16 +1216,16 @@
 <div class="navbar">
   <div class="navbar-inner">
 
-    <a href="#" class="logo">
+    <a href="#home" class="logo">
       <img src="image/logo.png" alt="Muthu Auto Spares & Scrap Yard">
     </a>
 
     <nav>
       <ul class="nav-links">
-        <li><a href="#" class="active">Home</a></li>
-        <li><a href="#">About Us</a></li>
+        <li><a href="#home" class="active">Home</a></li>
+        <li><a href="#about-section">About Us</a></li>
         <li><a href="https://servicemuthuautospares.netlify.app/" target="_blank" rel="noopener">Services</a></li>
-        <li><a href="#">Gallery</a></li>
+        <li><a href="https://peaceful-praline-cb4eb4.netlify.app" target="_blank" rel="noopener">Gallery</a></li>
         <li><a href="#contact-page">Contact Us</a></li>
       </ul>
     </nav>
@@ -1259,10 +1263,10 @@
   </div>
 
   <nav class="mobile-nav-links">
-    <a href="#" class="active">Home</a>
-    <a href="#">About Us</a>
+    <a href="#home" class="active">Home</a>
+    <a href="#about-section">About Us</a>
     <a href="https://servicemuthuautospares.netlify.app/" target="_blank" rel="noopener">Services</a>
-    <a href="#">Gallery</a>
+    <a href="https://peaceful-praline-cb4eb4.netlify.app" target="_blank" rel="noopener">Gallery</a>
     <a href="#contact-page">Contact Us</a>
   </nav>
 
@@ -1296,12 +1300,12 @@
 </aside>
 
 <!-- ===== HERO ===== -->
-<section class="hero">
+<section class="hero" id="home">
   <img src="image/banner.jpeg" alt="Trusted Source For Genuine Used Auto Spare Parts">
 </section>
 
 <!-- ============ ABOUT PAGE CONTENT ============ -->
-<section class="about-section">
+<section class="about-section" id="about-section">
   <div class="inner">
 
     <!-- ============ OUR STORY ============ -->
@@ -1605,35 +1609,35 @@
     <div class="cp-panel">
       <h2>SEND US AN <span>INQUIRY</span></h2>
       <div class="cp-underline"></div>
-      <form action="#" method="POST">
+      <form id="inquiryForm">
         <div class="cp-form-group">
           <div class="cp-input-wrap">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-            <input type="text" name="name" placeholder="Your Name" required>
+            <input type="text" name="name" id="inqName" placeholder="Your Name" required>
           </div>
         </div>
         <div class="cp-form-group">
           <div class="cp-input-wrap">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.81.34 1.6.65 2.34a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.74-1.24a2 2 0 0 1 2.11-.45c.74.31 1.53.53 2.34.65A2 2 0 0 1 22 16.92z"/></svg>
-            <input type="tel" name="phone" placeholder="Your Phone" required>
+            <input type="tel" name="phone" id="inqPhone" placeholder="Your Phone" required>
           </div>
         </div>
         <div class="cp-form-group">
           <div class="cp-input-wrap">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg>
-            <input type="email" name="email" placeholder="Your Email" required>
+            <input type="email" name="email" id="inqEmail" placeholder="Your Email" required>
           </div>
         </div>
         <div class="cp-form-group">
           <div class="cp-input-wrap">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m20.59 13.41-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><circle cx="7" cy="7" r="1"/></svg>
-            <input type="text" name="subject" placeholder="Subject">
+            <input type="text" name="subject" id="inqSubject" placeholder="Subject">
           </div>
         </div>
         <div class="cp-form-group">
           <div class="cp-input-wrap" style="align-items:flex-start;">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-top:4px;"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5z"/></svg>
-            <textarea name="message" placeholder="Your Message" required></textarea>
+            <textarea name="message" id="inqMessage" placeholder="Your Message" required></textarea>
           </div>
         </div>
         <button type="submit" class="cp-send-btn">
@@ -1777,6 +1781,33 @@
   }
   updateStoreStatus();
   setInterval(updateStoreStatus, 60000);
+
+  // ===== INQUIRY FORM -> SEND DIRECTLY TO WHATSAPP =====
+  const WHATSAPP_NUMBER = "918015010286"; // 91 = India country code + 8015010286
+
+  const inquiryForm = document.getElementById('inquiryForm');
+  inquiryForm.addEventListener('submit', function(e){
+    e.preventDefault();
+
+    const name = document.getElementById('inqName').value.trim();
+    const phone = document.getElementById('inqPhone').value.trim();
+    const email = document.getElementById('inqEmail').value.trim();
+    const subject = document.getElementById('inqSubject').value.trim();
+    const message = document.getElementById('inqMessage').value.trim();
+
+    let text = "New Inquiry - Muthu Auto Spares & Scrap Yard%0A%0A";
+    text += "Name: " + encodeURIComponent(name) + "%0A";
+    text += "Phone: " + encodeURIComponent(phone) + "%0A";
+    text += "Email: " + encodeURIComponent(email) + "%0A";
+    if(subject){ text += "Subject: " + encodeURIComponent(subject) + "%0A"; }
+    text += "Message: " + encodeURIComponent(message);
+
+    const whatsappURL = "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + text;
+
+    window.open(whatsappURL, "_blank");
+
+    inquiryForm.reset();
+  });
 </script>
 
 </body>
