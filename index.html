@@ -1,0 +1,1884 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Muthu Auto Spares &amp; Scrap Yard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --red:#e30613;
+    --red-dark:#b3050f;
+    --green:#2ecc71;
+    --black:#000000;
+    --near-black:#141414;
+    --text-light:#f5f5f5;
+    --text-muted:#c9c9c9;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    font-family:'Inter',sans-serif;
+    background:var(--near-black);
+    color:var(--text-light);
+  }
+
+  a{text-decoration:none;color:inherit;}
+  ul{list-style:none;}
+
+  /* ===== TOP INFO BAR ===== */
+  .topbar{
+    background:var(--near-black);
+    border-bottom:1px solid rgba(255,255,255,0.08);
+    font-size:13px;
+    color:var(--text-muted);
+  }
+  .topbar-inner{
+    max-width:1400px;
+    margin:0 auto;
+    padding:9px 32px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:10px;
+  }
+  .topbar-left{
+    display:flex;
+    align-items:center;
+    gap:28px;
+    flex-wrap:wrap;
+  }
+  .topbar-item{
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+  .topbar-item svg{
+    width:14px;height:14px;
+    fill:var(--red);
+    flex-shrink:0;
+  }
+  .topbar-item .short-text{display:none;}
+  .topbar-right{
+    display:flex;
+    align-items:center;
+    gap:22px;
+    flex-wrap:wrap;
+  }
+  .topbar-phones{
+    display:flex;
+    align-items:center;
+    gap:16px;
+  }
+  .topbar-phones a{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    color:var(--text-light);
+    font-weight:500;
+    transition:color .2s ease;
+  }
+  .topbar-phones a:hover{color:var(--red);}
+  .topbar-phones svg{width:13px;height:13px;fill:var(--red);}
+  
+  .social-icons{
+    display:flex;
+    gap:14px;
+  }
+  .social-icons a{
+    width:28px;height:28px;
+    border:1px solid rgba(255,255,255,0.15);
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transition:all .2s ease;
+  }
+  .social-icons a:hover{
+    background:var(--red);
+    border-color:var(--red);
+  }
+  .social-icons svg{width:13px;height:13px;fill:var(--text-light);}
+
+  /* ===== MAIN NAV ===== */
+  .navbar{
+    background:var(--black);
+    position:sticky;
+    top:0;
+    z-index:200;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+  .navbar-inner{
+    max-width:1400px;
+    margin:0 auto;
+    padding:0 32px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:24px;
+  }
+
+  .logo{
+    display:flex;
+    align-items:center;
+    flex-shrink:0;
+    height:100%;
+    padding:6px 0;
+  }
+  .logo img{
+    height: 72px;
+    max-height: 100%;
+    width: auto;
+    display: block;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+  }
+  .logo:hover img {
+    transform: scale(1.03);
+  }
+
+  .nav-links{
+    display:flex;
+    align-items:center;
+    gap:38px;
+  }
+  .nav-links a{
+    font-family:'Oswald',sans-serif;
+    font-size:15px;
+    font-weight:500;
+    letter-spacing:0.5px;
+    text-transform:uppercase;
+    color:var(--text-muted);
+    padding:8px 0;
+    position:relative;
+    transition:color .2s ease;
+  }
+  .nav-links a:hover{color:var(--text-light);}
+  .nav-links a.active{color:var(--text-light);}
+  .nav-links a.active::after{
+    content:"";
+    position:absolute;
+    left:0;bottom:0;
+    width:100%;
+    height:2px;
+    background:var(--red);
+  }
+
+  /* Specific mobile actions block (hidden on desktop) */
+  .mobile-actions {
+    display: none; 
+  }
+
+  .call-box{
+    display:flex;
+    align-items:stretch;
+    background:var(--red);
+    clip-path:polygon(14px 0, 100% 0, 100% 100%, 0 100%);
+    padding:9px 26px 9px 34px;
+    gap:14px;
+    align-items:center;
+    flex-shrink:0;
+    transition: background 0.3s ease;
+  }
+  .call-box:hover {
+    background: var(--red-dark);
+  }
+  .call-box .icon-circle{
+    width:38px;height:38px;
+    border-radius:50%;
+    background:rgba(255,255,255,0.18);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-shrink:0;
+  }
+  .call-box .icon-circle svg{
+    width:18px;height:18px;
+    fill:#fff;
+  }
+  .call-box .call-text .label{
+    font-size:11px;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    color:rgba(255,255,255,0.85);
+    font-weight:500;
+  }
+  .call-box .call-text .numbers{
+    font-family:'Oswald',sans-serif;
+    font-size:15px;
+    font-weight:600;
+    color:#fff;
+    line-height:1.3;
+  }
+
+  /* ===== BURGER ===== */
+  .burger{
+    display:none;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    gap:5px;
+    background:rgba(255,255,255,0.06);
+    border:1px solid rgba(255,255,255,0.12);
+    border-radius:6px;
+    width:42px;
+    height:42px;
+    cursor:pointer;
+    padding:0;
+    flex-shrink:0;
+  }
+  .burger span{
+    width:20px;height:2px;
+    background:var(--text-light);
+    display:block;
+    transition: all 0.3s ease;
+  }
+  .burger:hover{border-color:var(--red);}
+  .burger:hover span {
+    background: var(--red);
+  }
+  .burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+  .burger.open span:nth-child(2){opacity:0;}
+  .burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+  /* ===== STORE STATUS BADGE (mobile) ===== */
+  .status-badge{
+    display:flex;
+    align-items:center;
+    gap:7px;
+    height:40px;
+    padding:0 12px;
+    border-radius:20px;
+    background:rgba(255,255,255,0.06);
+    border:1px solid rgba(255,255,255,0.12);
+    flex-shrink:0;
+  }
+  .status-badge .dot{
+    width:8px;height:8px;
+    border-radius:50%;
+    flex-shrink:0;
+  }
+  .status-badge.is-open .dot{
+    background:var(--green);
+    box-shadow:0 0 0 0 rgba(46,204,113,0.6);
+    animation:pulse-dot 1.8s infinite;
+  }
+  .status-badge.is-closed .dot{
+    background:var(--red);
+  }
+  .status-badge .status-text{
+    font-family:'Oswald',sans-serif;
+    font-size:11px;
+    font-weight:600;
+    letter-spacing:0.5px;
+    text-transform:uppercase;
+    color:var(--text-light);
+    white-space:nowrap;
+  }
+  .status-badge.is-open .status-text{color:var(--green);}
+  .status-badge.is-closed .status-text{color:var(--text-muted);}
+
+  @keyframes pulse-dot{
+    0%{box-shadow:0 0 0 0 rgba(46,204,113,0.55);}
+    70%{box-shadow:0 0 0 7px rgba(46,204,113,0);}
+    100%{box-shadow:0 0 0 0 rgba(46,204,113,0);}
+  }
+
+  /* ===== MOBILE MENU ===== */
+  .mobile-menu-overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.6);
+    opacity:0;
+    visibility:hidden;
+    transition:opacity .3s ease;
+    z-index:250;
+  }
+  .mobile-menu-overlay.open{
+    opacity:1;
+    visibility:visible;
+  }
+
+  .mobile-menu{
+    position:fixed;
+    top:0;
+    right:0;
+    height:100%;
+    width:78%;
+    max-width:340px;
+    background:var(--near-black);
+    border-left:1px solid rgba(255,255,255,0.08);
+    transform:translateX(100%);
+    transition:transform .35s cubic-bezier(.4,0,.2,1);
+    z-index:260;
+    display:flex;
+    flex-direction:column;
+    padding:24px 26px 30px;
+    overflow-y:auto;
+  }
+  .mobile-menu.open{
+    transform:translateX(0);
+  }
+  .mobile-menu-top{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:30px;
+  }
+  .mobile-menu-top img{
+    height:46px;
+    width:auto;
+  }
+  .mobile-menu-close{
+    width:38px;height:38px;
+    border-radius:50%;
+    border:1px solid rgba(255,255,255,0.15);
+    background:transparent;
+    color:var(--text-light);
+    font-size:20px;
+    line-height:1;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+  }
+  .mobile-menu-close:hover{
+    background:var(--red);
+    border-color:var(--red);
+  }
+  .mobile-nav-links{
+    display:flex;
+    flex-direction:column;
+  }
+  .mobile-nav-links a{
+    font-family:'Oswald',sans-serif;
+    font-size:19px;
+    font-weight:500;
+    letter-spacing:0.5px;
+    text-transform:uppercase;
+    color:var(--text-muted);
+    padding:16px 4px;
+    border-bottom:1px solid rgba(255,255,255,0.08);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .mobile-nav-links a::after{
+    content:"→";
+    color:var(--red);
+    font-size:16px;
+    opacity:0;
+    transition:opacity .2s ease;
+  }
+  .mobile-nav-links a:hover,
+  .mobile-nav-links a.active{
+    color:var(--text-light);
+  }
+  .mobile-nav-links a:hover::after,
+  .mobile-nav-links a.active::after{
+    opacity:1;
+  }
+  .mobile-menu-call{
+    margin-top:26px;
+    background:var(--red);
+    border-radius:10px;
+    padding:16px 18px;
+    display:flex;
+    align-items:center;
+    gap:14px;
+  }
+  .mobile-menu-call .icon-circle{
+    width:40px;height:40px;
+    border-radius:50%;
+    background:rgba(255,255,255,0.2);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-shrink:0;
+  }
+  .mobile-menu-call .icon-circle svg{
+    width:18px;height:18px;
+    fill:#fff;
+  }
+  .mobile-menu-call .label{
+    font-size:11px;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    color:rgba(255,255,255,0.85);
+    font-weight:500;
+  }
+  .mobile-menu-call .numbers{
+    font-family:'Oswald',sans-serif;
+    font-size:16px;
+    font-weight:600;
+    color:#fff;
+    line-height:1.4;
+  }
+  .mobile-menu-info{
+    margin-top:22px;
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+    font-size:13px;
+    color:var(--text-muted);
+  }
+  .mobile-menu-info .topbar-item{
+    align-items:flex-start;
+  }
+  .mobile-menu-info svg{
+    width:15px;height:15px;
+    fill:var(--red);
+    flex-shrink:0;
+    margin-top:2px;
+  }
+  .mobile-menu-social{
+    display:flex;
+    gap:12px;
+    margin-top:22px;
+  }
+
+  /* ===== HERO ===== */
+  .hero{
+    width:100%;
+    overflow:hidden;
+    background:var(--black);
+    scroll-margin-top:90px;
+  }
+  .hero img{
+    width:100%;
+    height:auto;
+    display:block;
+  }
+
+  /* ========================================= */
+  /* === RESPONSIVE SECTION (SLEEK CUSTOM) === */
+  /* ========================================= */
+  
+  @media (max-width:1150px){
+    .nav-links{display:none;}
+    .burger{display:flex;}
+  }
+
+  @media (max-width:900px){
+    .call-box{display:none;}
+  }
+
+  @media (max-width:768px){
+    /* Hide topbar on mobile to keep it clean */
+    .topbar { display: none; }
+
+    /* Redesigned sleek mobile navbar */
+    .navbar { 
+      background: rgba(0, 0, 0, 0.9);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(255,255,255,0.08); /* clean, no red line */
+    }
+    
+    .navbar-inner {
+      padding: 0 16px;
+      height: 70px;
+      gap: 0;
+    }
+    
+    /* Clean Logo Integration - logo shown as background image on mobile */
+    .logo {
+      padding: 10px;
+      background-image: url('image/logo.png');
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: contain;
+      width: 150px;
+      height: 100%;
+      border: none;
+    }
+    .logo img {
+      opacity: 0;
+      visibility: hidden;
+      width: 150px;
+      height: 44px; /* reserves layout space, keeps alt text for accessibility */
+    }
+
+    /* Right side actions wrapper */
+    .mobile-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* Refined Burger Menu */
+    .burger {
+      display: flex;
+      flex: 0 0 42px;
+      height: 42px;
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 6px;
+    }
+
+    /* Hero Banner Mobile Crop */
+    .hero { height: 240px; }
+    .hero img {
+      width:100%;
+      height:100%;
+      max-width:none;
+      object-fit:cover;
+      object-position: left center;
+    }
+  }
+
+  @media (max-width: 380px) {
+    .navbar-inner { height: 64px; padding: 0 12px; }
+    .logo { padding: 8px; width: 120px; }
+    .logo img { height: 38px; width: 120px; }
+    .mobile-actions { gap: 8px; }
+    .burger { width: 38px; height: 38px; flex-basis: 38px; }
+    .status-badge { height: 36px; padding: 0 9px; }
+    .status-badge .status-text{ font-size:10px; }
+    .hero { height: 200px; }
+  }
+</style>
+
+<style>
+  /* ================= ABOUT PAGE STYLES ================= */
+  :root{
+    --bg:            #0a0a0a;
+    --bg-panel:      #131313;
+    --bg-card:       #17171777;
+    --card-border:   #2a2222;
+    --text:          #f4f0ee;
+    --text-dim:      #a89f9c;
+    --text-faint:    #726867;
+    --radius:        16px;
+  }
+
+  .about-section{
+    position:relative;
+    background:
+      linear-gradient(180deg, rgba(8,7,7,.80) 0%, rgba(8,7,7,.90) 35%, var(--bg) 78%),
+      url('image/background image.png');
+    background-repeat:no-repeat;
+    background-position:center top, center top;
+    background-size:cover, cover;
+    background-attachment:scroll;
+    padding:80px 6vw 0;
+    scroll-margin-top:90px;
+  }
+
+  .about-section > .inner{ position:relative; z-index:1; }
+
+  .about-section h1,.about-section h2,.about-section h3,.about-section h4{ font-family:'Oswald',sans-serif; letter-spacing:.02em; }
+
+  .eyebrow{
+    display:inline-block;
+    font-family:'Oswald',sans-serif;
+    font-size:13px;
+    font-weight:600;
+    letter-spacing:.28em;
+    color:var(--red);
+    margin-bottom:10px;
+  }
+
+  .accent{ color:var(--red); }
+
+  .divider{
+    width:64px;
+    height:3px;
+    background:var(--red);
+    border-radius:2px;
+    margin:14px auto 0;
+  }
+
+  .section-head{
+    text-align:center;
+    max-width:640px;
+    margin:0 auto 46px;
+  }
+  .section-head h2{
+    font-size:clamp(24px,4vw,34px);
+    font-weight:700;
+    text-transform:uppercase;
+  }
+
+  /* ================= STORY BLOCK ================= */
+  .story{
+    display:flex;
+    flex-direction:column;
+    gap:36px;
+    max-width:1180px;
+    margin:0 auto 90px;
+  }
+
+  .story-media{
+    position:relative;
+    border-radius:var(--radius);
+    overflow:hidden;
+    border:1px solid var(--card-border);
+    box-shadow:0 30px 60px -20px rgba(0,0,0,.7);
+  }
+  .story-media img{
+    display:block;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    aspect-ratio:21/9;
+  }
+  .story-media::after{
+    content:"";
+    position:absolute; inset:0;
+    background:linear-gradient(180deg, rgba(0,0,0,0) 55%, rgba(0,0,0,.55) 100%);
+  }
+
+  .story-copy .eyebrow{ margin-bottom:4px; }
+  .story-copy h2{
+    font-size:clamp(26px,4vw,38px);
+    font-weight:700;
+    text-transform:uppercase;
+    line-height:1.15;
+    margin-bottom:18px;
+  }
+  .story-copy p{
+    color:var(--text-dim);
+    font-size:15px;
+    line-height:1.75;
+    margin-bottom:18px;
+  }
+  .story-list{
+    list-style:none;
+    display:grid;
+    gap:11px;
+    margin-bottom:20px;
+  }
+  .story-list li{
+    display:flex;
+    align-items:flex-start;
+    gap:10px;
+    font-size:14.5px;
+    color:var(--text);
+  }
+  .story-list li svg{ flex:none; margin-top:2px; }
+  .story-tag{
+    font-size:14px;
+    color:var(--text-faint);
+    line-height:1.7;
+    border-top:1px solid var(--card-border);
+    padding-top:16px;
+  }
+
+  /* ================= STATS STRIP ================= */
+  .stats-wrap{
+    max-width:1180px;
+    margin:0 auto 100px;
+  }
+  .stats-title{
+    text-align:center;
+    font-size:clamp(18px,3vw,24px);
+    font-weight:600;
+    text-transform:uppercase;
+    letter-spacing:.04em;
+    margin-bottom:30px;
+  }
+  .stats-grid{
+    display:grid;
+    grid-template-columns:repeat(6,1fr);
+    gap:14px;
+  }
+  .stat-card{
+    border-radius:14px;
+    overflow:hidden;
+    line-height:0;
+    transition:transform .25s ease;
+  }
+  .stat-card:hover{ transform:translateY(-4px); }
+  .stat-card img{
+    display:block;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    aspect-ratio:1/1;
+  }
+
+  /* ================= TEAM ================= */
+  .team-wrap{ max-width:1000px; margin:0 auto 100px; }
+  .team-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:24px;
+  }
+  .team-card{
+    background:var(--bg-panel);
+    border:1px solid var(--card-border);
+    border-radius:var(--radius);
+    padding:30px 26px;
+    text-align:center;
+  }
+  .avatar{
+  border-radius:50%;
+  margin:0 auto 20px;
+  background:linear-gradient(160deg,#3a3232,#1a1414);
+  border:3px solid var(--red-dark);
+  display:flex; align-items:center; justify-content:center;
+  overflow:hidden;
+}
+  .avatar img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    object-position:center top;
+    display:block;
+  }
+  .team-role{
+    font-size:11.5px;
+    letter-spacing:.18em;
+    color:var(--red);
+    font-weight:600;
+    margin-bottom:6px;
+  }
+  .team-name{
+    font-family:'Oswald',sans-serif;
+    font-size:19px;
+    font-style:italic;
+    margin-bottom:12px;
+  }
+  .team-quote{
+    font-size:13.5px;
+    color:var(--text-dim);
+    font-style:italic;
+    border-top:1px solid var(--card-border);
+    padding-top:12px;
+  }
+
+  /* ================= VISION / MISSION ================= */
+  .vm-wrap{ max-width:1000px; margin:0 auto 100px; }
+  .vm-title{
+    text-align:center;
+    font-size:clamp(20px,3vw,26px);
+    font-weight:700;
+    text-transform:uppercase;
+    margin-bottom:30px;
+  }
+  .vm-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:24px;
+  }
+  .vm-card{
+    position:relative;
+    border-radius:var(--radius);
+    overflow:hidden;
+    border:1px solid var(--card-border);
+    box-shadow:0 20px 45px -18px rgba(0,0,0,.7);
+    line-height:0;
+  }
+  .vm-card img{
+    display:block;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    aspect-ratio:16/9;
+    transition:transform .4s ease;
+  }
+  .vm-card:hover img{ transform:scale(1.03); }
+
+  /* ================= WHY TRUST ================= */
+  .trust-wrap{ max-width:1180px; margin:0 auto 100px; }
+  .trust-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:16px;
+  }
+  .trust-card{
+    background:var(--bg-panel);
+    border:1px solid var(--card-border);
+    border-radius:14px;
+    padding:22px 16px;
+    display:flex;
+    align-items:center;
+    gap:14px;
+  }
+  .trust-icon{
+    flex:none;
+    width:40px;height:40px;
+    border-radius:10px;
+    background:rgba(226,19,31,.12);
+    display:flex;align-items:center;justify-content:center;
+  }
+  .trust-card span{
+    font-size:13px;
+    color:var(--text);
+    line-height:1.4;
+  }
+
+  /* ================= TESTIMONIALS ================= */
+  .test-wrap{ max-width:1180px; margin:0 auto 100px; }
+  .test-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+  }
+  .test-card{
+    background:var(--bg-panel);
+    border:1px solid var(--card-border);
+    border-radius:var(--radius);
+    padding:26px 24px;
+  }
+  .stars{ color:var(--red); font-size:14px; letter-spacing:2px; margin-bottom:14px; }
+  .test-card p{
+    font-size:13.5px;
+    color:var(--text-dim);
+    line-height:1.7;
+    margin-bottom:16px;
+  }
+  .test-name{ font-size:13px; font-weight:600; color:var(--text); }
+
+  /* ================= CTA BAR ================= */
+  .cta-bar{
+    position:relative;
+    margin-top:20px;
+    padding:0;
+    background:
+      linear-gradient(100deg, rgba(8,3,3,.98) 0%, rgba(55,6,9,.96) 45%, rgba(120,10,14,.92) 100%),
+      url('image/background image.png');
+    background-repeat:no-repeat;
+    background-position:center, right center;
+    background-size:cover, cover;
+    overflow:hidden;
+    border-top:1px solid rgba(255,255,255,.08);
+  }
+  .cta-inner{
+    position:relative; z-index:1;
+    max-width:1400px;
+    margin:0 auto;
+    display:flex;
+    flex-wrap:wrap;
+    align-items:stretch;
+  }
+  .cta-heading{
+    flex:1.15 1 300px;
+    padding:30px 40px;
+    border-right:1px solid rgba(255,255,255,.14);
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+  }
+  .cta-heading h3{
+    font-size:clamp(19px,2.3vw,25px);
+    line-height:1.25;
+    text-transform:uppercase;
+    margin-bottom:8px;
+  }
+  .cta-heading p{
+    font-size:13px;
+    color:#e3c9c9;
+    max-width:320px;
+    line-height:1.6;
+  }
+  .cta-items{
+    flex:2.4 1 640px;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+  }
+  .cta-item{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:22px 22px;
+    border-right:1px solid rgba(255,255,255,.14);
+  }
+  .cta-item:last-child{ border-right:none; }
+  .cta-icon{
+    flex:none;
+    width:42px;height:42px;
+    border-radius:50%;
+    background:var(--red);
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 6px 16px -4px rgba(226,19,31,.6);
+  }
+  .cta-item strong{
+    display:block;
+    font-family:'Oswald',sans-serif;
+    font-size:13px;
+    font-weight:600;
+    letter-spacing:.03em;
+    text-transform:uppercase;
+    margin-bottom:5px;
+    white-space:nowrap;
+  }
+  .cta-item span{
+    display:block;
+    font-size:12px;
+    color:#e9c9c9;
+    line-height:1.45;
+  }
+
+  /* ============ shared svg sizing ============ */
+  .about-section svg, .cta-bar svg{ display:block; }
+
+  /* ================= RESPONSIVE (ABOUT) ================= */
+  @media (max-width: 980px){
+    .stats-grid{ grid-template-columns:repeat(3,1fr); }
+    .trust-grid{ grid-template-columns:repeat(2,1fr); }
+    .test-grid{ grid-template-columns:1fr; }
+    .cta-items{ grid-template-columns:repeat(2,auto); }
+  }
+
+  @media (max-width: 840px){
+    .story{ gap:26px; }
+    .story-media img{ aspect-ratio:16/10; }
+  }
+
+  @media (max-width: 640px){
+    .about-section{ padding:60px 5vw 0; }
+    .team-grid{ grid-template-columns:1fr; }
+    .vm-grid{ grid-template-columns:1fr; }
+    .stats-grid{ grid-template-columns:repeat(2,1fr); }
+    .trust-grid{ grid-template-columns:1fr; }
+    .cta-inner{ flex-direction:column; }
+    .cta-heading{ border-right:none; border-bottom:1px solid rgba(255,255,255,.14); width:100%; }
+    .cta-items{ grid-template-columns:1fr 1fr; }
+    .cta-item{ border-bottom:1px solid rgba(255,255,255,.14); }
+    .cta-item:nth-child(2n){ border-right:none; }
+    .stat-card{ padding:18px 10px; }
+  }
+
+  @media (max-width: 420px){
+    .cta-items{ grid-template-columns:1fr; }
+    .cta-item{ border-right:none !important; }
+    .stats-grid{ grid-template-columns:1fr 1fr; }
+  }
+</style>
+
+<style>
+/* ================= CONTACT PAGE (SCOPED) ================= */
+
+  :root{
+    --cpbg: #0a0a0a;
+    --cppanel: #121212;
+    --cppanel-border: #262626;
+    --cpred: #e0121a;
+    --cptext: #f2f2f2;
+    --cpmuted: #9a9a9a;
+  }
+  #contact-page *{box-sizing:border-box;}
+  #contact-page{
+    background:var(--cpbg);
+    color:var(--cptext);
+    font-family:'Segoe UI', Arial, sans-serif;
+    padding:32px 16px 48px;
+    line-height:1.4;
+    scroll-margin-top:90px;
+  }
+  .cp-wrap{max-width:1400px;margin:0 auto;}
+  #contact-page a{max-width:100%;}
+  #contact-page img{max-width:100%;}
+
+  /* Heading */
+  .cp-heading{text-align:center;margin-bottom:28px;}
+  .cp-eyebrow{
+    color:var(--cpred);
+    font-weight:700;
+    letter-spacing:2px;
+    font-size:13px;
+    display:flex;align-items:center;justify-content:center;gap:12px;
+    margin-bottom:10px;
+  }
+  .cp-eyebrow::before,.cp-eyebrow::after{
+    content:"";width:40px;height:2px;background:var(--cpred);
+  }
+  .cp-heading h1{
+    font-size:clamp(30px,6vw,52px);
+    letter-spacing:1.5px;
+    font-weight:800;
+    line-height:1.1;
+  }
+  .cp-heading h1 span{color:var(--cpred);}
+  .cp-heading p{color:var(--cpmuted);margin-top:10px;font-size:14px;max-width:520px;margin-left:auto;margin-right:auto;}
+
+  /* Top info bar */
+  .cp-info-bar{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    border:1px solid var(--cppanel-border);
+    border-radius:14px;
+    background:var(--cppanel);
+    padding:22px 10px;
+    margin-bottom:24px;
+  }
+  .cp-info-item{
+    display:flex;
+    align-items:flex-start;
+    gap:14px;
+    padding:0 20px;
+    border-right:1px solid var(--cppanel-border);
+    min-width:0;
+  }
+  .cp-info-item:last-child{border-right:none;}
+  .cp-icon-circle{
+    width:48px;height:48px;min-width:48px;
+    border:2px solid var(--cpred);border-radius:50%;
+    display:flex;align-items:center;justify-content:center;color:var(--cpred);
+  }
+  .cp-icon-circle svg{width:22px;height:22px;}
+  .cp-info-item .cp-info-text{min-width:0;}
+  .cp-info-item h4{font-size:12.5px;letter-spacing:0.8px;color:#e8e8e8;margin-bottom:6px;white-space:nowrap;}
+  .cp-info-item .cp-highlight{color:var(--cpred);}
+  .cp-info-item p, .cp-info-item a{font-size:13.5px;color:var(--cpmuted);line-height:1.55;text-decoration:none;display:block;}
+  .cp-info-item a:hover{color:var(--cpred);}
+
+  /* Main grid */
+  .cp-main-grid{
+    display:grid;
+    grid-template-columns:1fr 1.15fr 1fr;
+    gap:20px;
+    align-items:start;
+  }
+  .cp-panel{
+    background:var(--cppanel);
+    border:1px solid var(--cppanel-border);
+    border-radius:14px;
+    padding:24px;
+    min-width:0;
+  }
+  .cp-panel h2{
+    font-size:19px;letter-spacing:0.5px;font-weight:800;margin-bottom:14px;
+  }
+  .cp-panel h2 span{color:var(--cpred);}
+  .cp-underline{
+    width:36px;height:3px;background:var(--cpred);margin-bottom:18px;
+  }
+
+  /* Locations */
+  .cp-location-block{margin-bottom:18px;padding-bottom:18px;border-bottom:1px solid var(--cppanel-border);}
+  .cp-location-block:last-of-type{border-bottom:none;margin-bottom:14px;}
+  .cp-loc-title{display:flex;align-items:center;gap:7px;color:var(--cpred);font-weight:700;font-size:13px;letter-spacing:0.5px;margin-bottom:8px;}
+  .cp-loc-title svg{width:15px;height:15px;flex-shrink:0;}
+  .cp-location-block p{color:#d8d8d8;font-size:13.5px;line-height:1.6;margin-bottom:12px;}
+  .cp-btn-outline{
+    display:inline-flex;align-items:center;gap:7px;
+    border:1px solid var(--cpred);color:var(--cpred);
+    padding:9px 16px;border-radius:6px;font-size:11.5px;font-weight:700;
+    text-decoration:none;letter-spacing:0.4px;white-space:nowrap;
+    transition:background .2s ease,color .2s ease;
+  }
+  .cp-btn-outline svg{flex-shrink:0;width:14px;height:14px;}
+  .cp-btn-outline:hover{background:var(--cpred);color:#fff;}
+  .cp-map-embed{
+    border-radius:10px;overflow:hidden;border:1px solid var(--cppanel-border);margin-top:4px;
+    aspect-ratio:16/9;
+  }
+  .cp-map-embed iframe{width:100%;height:100%;border:0;display:block;}
+  .cp-map-open-btn{
+    display:flex;align-items:center;justify-content:center;gap:8px;
+    background:var(--cpred);color:#fff;text-decoration:none;
+    font-weight:700;font-size:12.5px;letter-spacing:0.5px;
+    padding:13px;margin-top:10px;border-radius:8px;
+  }
+  .cp-map-open-btn svg{width:15px;height:15px;flex-shrink:0;}
+  .cp-map-open-btn:hover{background:#b70e14;}
+
+  /* Form */
+  .cp-form-group{margin-bottom:12px;}
+  .cp-input-wrap{
+    display:flex;align-items:center;gap:10px;
+    background:#181818;border:1px solid var(--cppanel-border);
+    border-radius:8px;padding:12px 14px;
+  }
+  .cp-input-wrap svg{width:16px;height:16px;color:var(--cpmuted);flex-shrink:0;}
+  .cp-input-wrap input, .cp-input-wrap textarea{
+    background:transparent;border:none;outline:none;
+    color:var(--cptext);font-size:14px;width:100%;font-family:inherit;
+    resize:vertical;
+  }
+  .cp-input-wrap textarea{min-height:84px;padding-top:4px;}
+  .cp-input-wrap input::placeholder, .cp-input-wrap textarea::placeholder{color:#777;}
+  .cp-send-btn{
+    width:100%;background:var(--cpred);color:#fff;border:none;
+    padding:14px;border-radius:8px;font-weight:700;letter-spacing:1px;
+    font-size:13.5px;display:flex;align-items:center;justify-content:center;gap:10px;
+    cursor:pointer;margin-top:4px;transition:background .2s ease;
+  }
+  .cp-send-btn:hover{background:#b70e14;}
+  .cp-send-btn svg{width:16px;height:16px;}
+
+  /* Why choose us */
+  .cp-reason{display:flex;gap:14px;padding:14px 0;border-bottom:1px solid var(--cppanel-border);}
+  .cp-reason:last-of-type{border-bottom:none;}
+  .cp-reason .cp-icon-circle{width:44px;height:44px;min-width:44px;}
+  .cp-reason h4{color:var(--cpred);font-size:14px;margin-bottom:4px;letter-spacing:0.3px;}
+  .cp-reason p{color:var(--cpmuted);font-size:12.5px;line-height:1.5;}
+
+  .cp-follow{margin-top:20px;}
+  .cp-follow h4{font-size:13px;letter-spacing:1px;margin-bottom:14px;}
+  .cp-social-row{display:flex;gap:10px;}
+  .cp-social-row a{
+    width:40px;height:40px;min-width:40px;border:1px solid var(--cpred);border-radius:50%;
+    display:flex;align-items:center;justify-content:center;color:var(--cpred);
+    text-decoration:none;transition:all .2s ease;
+  }
+  .cp-social-row a:hover{background:var(--cpred);color:#fff;}
+  .cp-social-row svg{width:17px;height:17px;}
+
+  /* Footer bar */
+  .cp-footer-bar{
+    margin-top:20px;
+    border:1px solid var(--cppanel-border);border-radius:14px;
+    background:
+      linear-gradient(rgba(10,10,10,0.78), rgba(10,10,10,0.78)),
+      url('image/logo.png') center / cover no-repeat;
+    display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:24px;
+    padding:32px 40px;
+    min-height:96px;
+    position:relative;
+    overflow:hidden;
+  }
+  .cp-footer-left{display:flex;align-items:center;gap:14px;min-width:0;}
+  .cp-footer-left .cp-icon-circle{border-radius:10px;background:var(--cpred);color:#fff;border:none;}
+  .cp-footer-left a{color:var(--cpred);text-decoration:none;font-weight:700;font-size:13.5px;}
+  .cp-footer-left p{font-size:12.5px;color:#ccc;margin-bottom:3px;}
+  .cp-footer-right{text-align:right;}
+  .cp-footer-right p{font-size:12.5px;color:#ccc;line-height:1.5;}
+  .cp-footer-right .cp-highlight{color:var(--cpred);font-weight:700;}
+
+  /* ===================== RESPONSIVE ===================== */
+  @media(max-width:1080px){
+    .cp-main-grid{grid-template-columns:1fr;}
+  }
+
+  @media(max-width:820px){
+    .cp-info-bar{grid-template-columns:1fr 1fr;gap:20px 12px;row-gap:22px;}
+    .cp-info-item{border-right:none;padding:0 4px;}
+    .cp-info-item:nth-child(odd){border-right:1px solid var(--cppanel-border);}
+    .cp-footer-bar{grid-template-columns:1fr;text-align:center;gap:16px;}
+    .cp-footer-left{justify-content:center;}
+    .cp-footer-right{text-align:center;}
+  }
+
+  @media(max-width:560px){
+    #contact-page{padding:24px 12px 36px;}
+    .cp-info-bar{grid-template-columns:1fr;padding:20px 16px;gap:18px;}
+    .cp-info-item{border-right:none !important;padding:0;border-bottom:1px solid var(--cppanel-border);padding-bottom:16px;}
+    .cp-info-item:last-child{border-bottom:none;padding-bottom:0;}
+    .cp-info-item h4{white-space:normal;}
+    .cp-panel{padding:20px 18px;}
+  }
+
+  @media(max-width:400px){
+    .cp-heading h1{font-size:28px;}
+    .cp-eyebrow::before,.cp-eyebrow::after{width:26px;}
+  }
+
+  
+    /* ===== PRIVACY POLICY BUTTON ===== */
+  .cp-footer-left{ flex-wrap:wrap; }
+
+  .cp-footer-left .cp-privacy-btn{
+    display:inline-flex;
+    align-items:center;
+    gap:9px;
+    margin-left:10px;
+    padding:13px 26px;
+    border:1px solid rgba(255,255,255,0.35);
+    border-radius:999px;
+    background:linear-gradient(135deg,#ff2a34 0%,#e0121a 55%,#b70e14 100%);
+    color:#fff;
+    font-size:13px;
+    font-weight:700;
+    letter-spacing:1.4px;
+    text-transform:uppercase;
+    text-shadow:0 1px 2px rgba(0,0,0,0.45);
+    white-space:nowrap;
+    text-decoration:none;
+    box-shadow:0 6px 22px -4px rgba(224,18,26,0.75),
+               inset 0 1px 0 rgba(255,255,255,0.28);
+    transition:background .25s ease, color .25s ease, box-shadow .25s ease, transform .25s ease;
+    animation:cpPrivacyPulse 2.4s ease-in-out infinite;
+  }
+  .cp-privacy-btn svg{
+    width:18px; height:18px; flex-shrink:0;
+    color:#fff;
+    transition:color .25s ease;
+  }
+  .cp-privacy-btn .arrow{ transition:transform .25s ease; }
+
+  .cp-footer-left .cp-privacy-btn:hover{
+    background:#fff;
+    color:#e0121a;
+    border-color:#fff;
+    text-shadow:none;
+    transform:translateY(-3px) scale(1.03);
+    box-shadow:0 12px 28px -6px rgba(255,255,255,0.45);
+    animation:none;
+  }
+  .cp-privacy-btn:hover svg{ color:#e0121a; }
+  .cp-privacy-btn:hover .arrow{ transform:translateX(4px); }
+  .cp-privacy-btn:focus-visible{ outline:2px solid #fff; outline-offset:3px; }
+
+  @keyframes cpPrivacyPulse{
+    0%,100%{ box-shadow:0 6px 22px -4px rgba(224,18,26,0.75),
+                        inset 0 1px 0 rgba(255,255,255,0.28),
+                        0 0 0 0 rgba(224,18,26,0.55); }
+    50%    { box-shadow:0 6px 22px -4px rgba(224,18,26,0.75),
+                        inset 0 1px 0 rgba(255,255,255,0.28),
+                        0 0 0 10px rgba(224,18,26,0); }
+  }
+
+  @media(max-width:820px){
+    .cp-footer-left .cp-privacy-btn{ margin-left:0; margin-top:6px; }
+  }
+
+  @media (prefers-reduced-motion:reduce){
+    .cp-footer-left .cp-privacy-btn{ animation:none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== TOP INFO BAR ===== -->
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="topbar-left">
+      <div class="topbar-item">
+        <svg viewBox="0 0 24 24"><path d="M12 2C7.6 2 4 5.6 4 10c0 5.4 7 11.5 7.3 11.7.2.2.4.3.7.3s.5-.1.7-.3C13 21.5 20 15.4 20 10c0-4.4-3.6-8-8-8zm0 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/></svg>
+        <span class="full-text">Metthupalayam Main Road, Avinashi, Tirupur (Dt) - 641 654</span>
+        <span class="short-text">Avinashi Tirupur</span>
+      </div>
+      <div class="topbar-item">
+        <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm1 10.6 4 2.3-.8 1.4L11 13V6h1.5v6.6z"/></svg>
+        <span class="full-text">Mon - Sat: 9.30 AM - 8.00 PM &nbsp;|&nbsp; Sunday Closed</span>
+        <span class="short-text">Mon - Sat: 9.30 AM - 8.00 PM</span>
+      </div>
+    </div>
+    <div class="topbar-right">
+      <div class="topbar-phones">
+        <a href="tel:8754334359">
+          <svg viewBox="0 0 24 24"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.4.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.4 0 .8-.3 1L6.6 10.8z"/></svg>
+          87543 34359
+        </a>
+        <a href="tel:9150222114">
+          <svg viewBox="0 0 24 24"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.4.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.4 0 .8-.3 1L6.6 10.8z"/></svg>
+          91502 22114
+        </a>
+      </div>
+      <div class="social-icons">
+        <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M22 12a10 10 0 1 0-11.6 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.4h-1.2c-1.2 0-1.6.8-1.6 1.6V12h2.8l-.4 2.9h-2.4v7A10 10 0 0 0 22 12z"/></svg></a>
+        <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2c2.7 0 3.1 0 4.1.1 1.1 0 1.8.2 2.5.5.7.3 1.2.6 1.8 1.2.6.6.9 1.1 1.2 1.8.3.7.5 1.4.5 2.5.1 1 .1 1.4.1 4.1s0 3.1-.1 4.1c0 1.1-.2 1.8-.5 2.5-.3.7-.6 1.2-1.2 1.8-.6.6-1.1.9-1.8 1.2-.7.3-1.4.5-2.5.5-1 .1-1.4.1-4.1.1s-3.1 0-4.1-.1c-1.1 0-1.8-.2-2.5-.5-.7-.3-1.2-.6-1.8-1.2-.6-.6-.9-1.1-1.2-1.8-.3-.7-.5-1.4-.5-2.5C2 15.1 2 14.7 2 12s0-3.1.1-4.1c0-1.1.2-1.8.5-2.5.3-.7.6-1.2 1.2-1.8.6-.6 1.1-.9 1.8-1.2.7-.3 1.4-.5 2.5-.5C8.9 2 9.3 2 12 2zm0 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 8.2a3.2 3.2 0 1 1 0-6.4 3.2 3.2 0 0 1 0 6.4zm5.2-8.4a1.2 1.2 0 1 1-2.4 0 1.2 1.2 0 0 1 2.4 0z"/></svg></a>
+        <a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24"><path d="M21.6 7.2s-.2-1.5-.8-2.1c-.8-.8-1.7-.8-2.1-.9C15.9 4 12 4 12 4h0s-3.9 0-6.7.2c-.4.1-1.3.1-2.1.9-.6.6-.8 2.1-.8 2.1S2.2 9 2.2 10.7v1.6c0 1.7.2 3.5.2 3.5s.2 1.5.8 2.1c.8.8 1.9.8 2.3.9C7.1 19 12 19 12 19s3.9 0 6.7-.3c.4-.1 1.3-.1 2.1-.9.6-.6.8-2.1.8-2.1s.2-1.7.2-3.5v-1.6c0-1.7-.2-3.4-.2-3.4zM9.9 14.6V8.9l5.4 2.9-5.4 2.8z"/></svg></a>
+        <a href="#" aria-label="WhatsApp"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.1-1.3A10 10 0 1 0 12 2zm0 18.2c-1.6 0-3.1-.4-4.4-1.2l-.3-.2-3 .8.8-2.9-.2-.3a8.2 8.2 0 1 1 7.1 3.8zm4.5-6.1c-.2-.1-1.4-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1-.2-.1-1-.4-1.9-1.2-.7-.6-1.2-1.4-1.3-1.6-.1-.2 0-.4.1-.5l.4-.4c.1-.1.2-.3.2-.4.1-.2 0-.3 0-.5l-.7-1.7c-.2-.4-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9s.8 2.2.9 2.4c.1.2 1.6 2.5 4 3.5.5.2 1 .4 1.3.5.6.2 1.1.1 1.5.1.5-.1 1.4-.6 1.6-1.1.2-.5.2-1 .1-1.1-.1-.1-.3-.2-.5-.3z"/></svg></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== MAIN NAV ===== -->
+<div class="navbar">
+  <div class="navbar-inner">
+
+    <a href="#home" class="logo">
+      <img src="image/logo.png" alt="Muthu Auto Spares & Scrap Yard">
+    </a>
+
+    <nav>
+      <ul class="nav-links">
+        <li><a href="#home" class="active">Home</a></li>
+        <li><a href="#about-section">About Us</a></li>
+        <li><a href="https://servicemuthuautospares.netlify.app/" target="_blank" rel="noopener">Services</a></li>
+        <li><a href="https://peaceful-praline-cb4eb4.netlify.app" target="_blank" rel="noopener">Gallery</a></li>
+        <li><a href="#contact-page">Contact Us</a></li>
+      </ul>
+    </nav>
+
+    <!-- Desktop Call Box -->
+    <a href="tel:8754334359" class="call-box">
+      <span class="icon-circle">
+        <svg viewBox="0 0 24 24"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.4.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.4 0 .8-.3 1L6.6 10.8z"/></svg>
+      </span>
+      <span class="call-text">
+        <span class="label">Call Us Now</span><br>
+        <span class="numbers">87543 34359<br>91502 22114</span>
+      </span>
+    </a>
+
+    <!-- Mobile Action Buttons -->
+    <div class="mobile-actions">
+      <div class="status-badge" id="statusBadge">
+        <span class="dot"></span>
+        <span class="status-text" id="statusText">Checking...</span>
+      </div>
+      <button class="burger" id="burgerBtn" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== MOBILE MENU ===== -->
+<div class="mobile-menu-overlay" id="menuOverlay"></div>
+<aside class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu-top">
+    <img src="image/logo.png" alt="Muthu Auto Spares & Scrap Yard">
+    <button class="mobile-menu-close" id="menuCloseBtn" aria-label="Close menu">&times;</button>
+  </div>
+
+  <nav class="mobile-nav-links">
+    <a href="#home" class="active">Home</a>
+    <a href="#about-section">About Us</a>
+    <a href="https://servicemuthuautospares.netlify.app/" target="_blank" rel="noopener">Services</a>
+    <a href="https://peaceful-praline-cb4eb4.netlify.app" target="_blank" rel="noopener">Gallery</a>
+    <a href="#contact-page">Contact Us</a>
+  </nav>
+
+  <a href="tel:8754334359" class="mobile-menu-call">
+    <span class="icon-circle">
+      <svg viewBox="0 0 24 24"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.4.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.4 0 .8-.3 1L6.6 10.8z"/></svg>
+    </span>
+    <span>
+      <span class="label">Call Us Now</span><br>
+      <span class="numbers">87543 34359 / 91502 22114</span>
+    </span>
+  </a>
+
+  <div class="mobile-menu-info">
+    <div class="topbar-item">
+      <svg viewBox="0 0 24 24"><path d="M12 2C7.6 2 4 5.6 4 10c0 5.4 7 11.5 7.3 11.7.2.2.4.3.7.3s.5-.1.7-.3C13 21.5 20 15.4 20 10c0-4.4-3.6-8-8-8zm0 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/></svg>
+      <span>Avinashi, Tirupur, Tamil Nadu</span>
+    </div>
+    <div class="topbar-item">
+      <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm1 10.6 4 2.3-.8 1.4L11 13V6h1.5v6.6z"/></svg>
+      <span>Mon - Sat: 9.30 AM - 8.00 PM</span>
+    </div>
+  </div>
+
+  <div class="mobile-menu-social social-icons">
+    <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M22 12a10 10 0 1 0-11.6 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.4h-1.2c-1.2 0-1.6.8-1.6 1.6V12h2.8l-.4 2.9h-2.4v7A10 10 0 0 0 22 12z"/></svg></a>
+    <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2c2.7 0 3.1 0 4.1.1 1.1 0 1.8.2 2.5.5.7.3 1.2.6 1.8 1.2.6.6.9 1.1 1.2 1.8.3.7.5 1.4.5 2.5.1 1 .1 1.4.1 4.1s0 3.1-.1 4.1c0 1.1-.2 1.8-.5 2.5-.3.7-.6 1.2-1.2 1.8-.6.6-1.1.9-1.8 1.2-.7.3-1.4.5-2.5.5-1 .1-1.4.1-4.1.1s-3.1 0-4.1-.1c-1.1 0-1.8-.2-2.5-.5-.7-.3-1.2-.6-1.8-1.2-.6-.6-.9-1.1-1.2-1.8-.3-.7-.5-1.4-.5-2.5C2 15.1 2 14.7 2 12s0-3.1.1-4.1c0-1.1.2-1.8.5-2.5.3-.7.6-1.2 1.2-1.8.6-.6 1.1-.9 1.8-1.2.7-.3 1.4-.5 2.5-.5C8.9 2 9.3 2 12 2zm0 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 8.2a3.2 3.2 0 1 1 0-6.4 3.2 3.2 0 0 1 0 6.4zm5.2-8.4a1.2 1.2 0 1 1-2.4 0 1.2 1.2 0 0 1 2.4 0z"/></svg></a>
+    <a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24"><path d="M21.6 7.2s-.2-1.5-.8-2.1c-.8-.8-1.7-.8-2.1-.9C15.9 4 12 4 12 4h0s-3.9 0-6.7.2c-.4.1-1.3.1-2.1.9-.6.6-.8 2.1-.8 2.1S2.2 9 2.2 10.7v1.6c0 1.7.2 3.5.2 3.5s.2 1.5.8 2.1c.8.8 1.9.8 2.3.9C7.1 19 12 19 12 19s3.9 0 6.7-.3c.4-.1 1.3-.1 2.1-.9.6-.6.8-2.1.8-2.1s.2-1.7.2-3.5v-1.6c0-1.7-.2-3.4-.2-3.4zM9.9 14.6V8.9l5.4 2.9-5.4 2.8z"/></svg></a>
+    <a href="#" aria-label="WhatsApp"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.1-1.3A10 10 0 1 0 12 2zm0 18.2c-1.6 0-3.1-.4-4.4-1.2l-.3-.2-3 .8.8-2.9-.2-.3a8.2 8.2 0 1 1 7.1 3.8zm4.5-6.1c-.2-.1-1.4-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1-.2-.1-1-.4-1.9-1.2-.7-.6-1.2-1.4-1.3-1.6-.1-.2 0-.4.1-.5l.4-.4c.1-.1.2-.3.2-.4.1-.2 0-.3 0-.5l-.7-1.7c-.2-.4-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9s.8 2.2.9 2.4c.1.2 1.6 2.5 4 3.5.5.2 1 .4 1.3.5.6.2 1.1.1 1.5.1.5-.1 1.4-.6 1.6-1.1.2-.5.2-1 .1-1.1-.1-.1-.3-.2-.5-.3z"/></svg></a>
+  </div>
+</aside>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="home">
+  <img src="image/banner.jpeg" alt="Trusted Source For Genuine Used Auto Spare Parts">
+</section>
+
+<!-- ============ ABOUT PAGE CONTENT ============ -->
+<section class="about-section" id="about-section">
+  <div class="inner">
+
+    <!-- ============ OUR STORY ============ -->
+    <div class="story">
+      <div class="story-copy">
+        <span class="eyebrow">OUR STORY</span>
+        <h2>Our Journey <span class="accent">Since 2021</span></h2>
+        <p>Founded in 2021, Muthu Auto Spares &amp; Scrap Yard started with a simple mission — to make quality used auto spare parts affordable and accessible for everyone.</p>
+        <p>Over the years, we have grown into a trusted destination for vehicle owners, mechanics, and workshops by delivering:</p>
+        <ul class="story-list">
+          <li>
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#e2131f"/><path d="M5 9.2l2.4 2.4L13 6" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Genuine used spare parts
+          </li>
+          <li>
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#e2131f"/><path d="M5 9.2l2.4 2.4L13 6" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Affordable pricing
+          </li>
+          <li>
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#e2131f"/><path d="M5 9.2l2.4 2.4L13 6" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Reliable customer support
+          </li>
+          <li>
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#e2131f"/><path d="M5 9.2l2.4 2.4L13 6" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Quality-tested components
+          </li>
+        </ul>
+        <p class="story-tag">Today, we proudly serve customers across Tamil Nadu through our two physical yards and online order services.</p>
+      </div>
+      <div class="story-media">
+        <img src="image/about image.png" alt="Muthu Auto Spares warehouse">
+      </div>
+    </div>
+
+    <!-- ============ NUMBERS ============ -->
+    <div class="stats-wrap">
+      <h3 class="stats-title">Our <span class="accent">Numbers</span> Speak For Us</h3>
+      <div class="stats-grid">
+
+        <div class="stat-card">
+          <img src="image/1st.png" alt="100,000+ Happy Customers">
+        </div>
+
+        <div class="stat-card">
+          <img src="image/2nd.png" alt="10,000+ Successful Engine Swaps">
+        </div>
+
+        <div class="stat-card">
+          <img src="image/3rd.png" alt="2 Auto Spare Yards">
+        </div>
+
+        <div class="stat-card">
+          <img src="image/4th.png" alt="350K+ Followers Across Digital Platforms">
+        </div>
+
+        <div class="stat-card">
+          <img src="image/5th.png" alt="Online Orders Available Across India">
+        </div>
+
+        <div class="stat-card">
+          <img src="image/6th.png" alt="Since 2021">
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ============ TEAM ============ -->
+    <div class="team-wrap">
+      <div class="section-head">
+        <h2>Meet The People Behind <span class="accent">Our Success</span></h2>
+        <div class="divider"></div>
+      </div>
+      <div class="team-grid">
+        <div class="team-card">
+          <div class="avatar">
+            <img src="image/founder.png" alt="Muthu Raj B - Founder & Owner">
+          </div>
+          <div class="team-role">FOUNDER &amp; OWNER</div>
+          <div class="team-name">Muthu Raj B</div>
+          <p style="font-size:12px;color:var(--text-faint);margin-bottom:12px;">Founder of Muthu Auto Spares &amp; Scrap Yard, leading the business with a vision of providing genuine used spare parts and trustworthy service to every customer.</p>
+          <p class="team-quote">"Trust is built through quality and honest service."</p>
+        </div>
+        <div class="team-card">
+          <div class="avatar">
+            <img src="image/cofounder.png" alt="Madhan B - Co-Founder">
+          </div>
+          <div class="team-role">CO-FOUNDER / BUSINESS PARTNER</div>
+          <div class="team-name">Madhan B</div>
+          <p style="font-size:12px;color:var(--text-faint);margin-bottom:12px;">Responsible for daily operations, inventory management, customer relationships, and ensuring smooth service delivery.</p>
+          <p class="team-quote">"Every customer deserves the right part at the right price."</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ VISION / MISSION ============ -->
+    <div class="vm-wrap">
+      <div class="vm-title">Our <span class="accent">Vision</span> &amp; Mission</div>
+      <div class="vm-grid">
+        <div class="vm-card">
+          <img src="image/vision.png" alt="Our Vision — To become Tamil Nadu's most trusted destination for genuine used auto spare parts and engine solutions.">
+        </div>
+        <div class="vm-card">
+          <img src="image/mission.png" alt="Our Mission — To provide quality-tested spare parts, affordable prices, and dependable service that keeps every vehicle moving.">
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ WHY TRUST US ============ -->
+    <div class="trust-wrap">
+      <div class="section-head">
+        <h2>Why Thousands Trust <span class="accent">Muthu Auto Spares</span></h2>
+        <div class="divider"></div>
+      </div>
+      <div class="trust-grid">
+        <div class="trust-card">
+          <div class="trust-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 3l7 3v5.5c0 4.7-3 8.2-7 9.5-4-1.3-7-4.8-7-9.5V6l7-3z" stroke="#e2131f" stroke-width="1.5" stroke-linejoin="round"/><path d="M9 12.2l2 2 4-4.4" stroke="#e2131f" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <span>Genuine Used Spare Parts</span>
+        </div>
+        <div class="trust-card">
+          <div class="trust-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M11.2 3.2l8 8a1.6 1.6 0 010 2.3l-6 6a1.6 1.6 0 01-2.3 0l-8-8V4a.8.8 0 01.8-.8h7.5z" stroke="#e2131f" stroke-width="1.5" stroke-linejoin="round"/><circle cx="7.3" cy="7.3" r="1.4" fill="#e2131f"/></svg></div>
+          <span>Affordable Pricing</span>
+        </div>
+        <div class="trust-card">
+          <div class="trust-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4 21V6a1 1 0 011-1h6a1 1 0 011 1v15" stroke="#e2131f" stroke-width="1.5" stroke-linejoin="round"/><path d="M2 21h13M12 10h2.3l2.9 2.9V19a1 1 0 01-1 1H12" stroke="#e2131f" stroke-width="1.5" stroke-linejoin="round"/><path d="M6.5 8.5h2.5" stroke="#e2131f" stroke-width="1.4" stroke-linecap="round"/><circle cx="16.3" cy="19" r="1.3" stroke="#e2131f" stroke-width="1.3"/></svg></div>
+          <span>Diesel &amp; Petrol Spare Parts Available</span>
+        </div>
+        <div class="trust-card">
+          <div class="trust-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M20 11A8 8 0 106.3 17.7" stroke="#e2131f" stroke-width="1.5" stroke-linecap="round"/><path d="M20 6v5h-5" stroke="#e2131f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 9v4l3 1.6" stroke="#e2131f" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <span>3-Day Replacement Guarantee</span>
+        </div>
+        <div class="trust-card">
+          <div class="trust-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 8.5a3.5 3.5 0 100 7 3.5 3.5 0 000-7z" stroke="#e2131f" stroke-width="1.5"/><path d="M12 2.5v2.4M12 19.1v2.4M4.9 4.9l1.7 1.7M17.4 17.4l1.7 1.7M19.1 6.6l-1.7 1.7M6.6 17.4l-1.7 1.7M2.5 12h2.4M19.1 12h2.4" stroke="#e2131f" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+          <span>1,000+ Successful Engine Swap Stories</span>
+        </div>
+        <div class="trust-card">
+          <div class="trust-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4 20V10.5a1 1 0 01.45-.83L11.45 5a1 1 0 011.1 0l7 4.67a1 1 0 01.45.83V20" stroke="#e2131f" stroke-width="1.5" stroke-linejoin="round"/><path d="M2 20h20M9 20v-5.5h6V20" stroke="#e2131f" stroke-width="1.5" stroke-linejoin="round"/></svg></div>
+          <span>Two Physical Yards &amp; Online Orders</span>
+        </div>
+        <div class="trust-card">
+          <div class="trust-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="10" r="6.3" stroke="#e2131f" stroke-width="1.5"/><path d="M9.3 10.1l1.8 1.8 3.6-3.9" stroke="#e2131f" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M9 15.6l-1.4 5.2 4.4-2.4 4.4 2.4-1.4-5.2" stroke="#e2131f" stroke-width="1.4" stroke-linejoin="round"/></svg></div>
+          <span>Quality Tested Parts</span>
+        </div>
+        <div class="trust-card">
+          <div class="trust-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 20.5s-7.3-4.3-7.3-9.8A4 4 0 0112 8.3a4 4 0 017.3 2.4c0 5.5-7.3 9.8-7.3 9.8z" stroke="#e2131f" stroke-width="1.5" stroke-linejoin="round"/></svg></div>
+          <span>Customer-First Service</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ TESTIMONIALS ============ -->
+    <div class="test-wrap">
+      <div class="section-head">
+        <h2>What Our <span class="accent">Customers</span> Say</h2>
+        <div class="divider"></div>
+      </div>
+      <div class="test-grid">
+        <div class="test-card">
+          <div class="stars">★★★★★</div>
+          <p>Wide range of genuine used parts. Best place for engine and body parts. Quality and service are excellent!</p>
+          <div class="test-name">– Ramesh, Coimbatore</div>
+        </div>
+        <div class="test-card">
+          <div class="stars">★★★★★</div>
+          <p>I found a perfect engine for my car. 3-day replacement guarantee gives so much confidence.</p>
+          <div class="test-name">– Suresh, Erode</div>
+        </div>
+        <div class="test-card">
+          <div class="stars">★★★★★</div>
+          <p>Online order was easy and delivery was on time. Highly recommended!</p>
+          <div class="test-name">– Karthik, Chennai</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ CTA BAR ============ -->
+<section class="cta-bar">
+  <div class="cta-inner">
+    <div class="cta-heading">
+      <h3>Need The Right Spare Part?</h3>
+      <p>Whether you're looking for an engine, gearbox, body parts, or accessories, our team is ready to help.</p>
+    </div>
+    <div class="cta-items">
+      <div class="cta-item">
+        <div class="cta-icon"><svg width="19" height="19" viewBox="0 0 24 24" fill="none"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3 19.5 19.5 0 01-6-6 19.8 19.8 0 01-3-8.7A2 2 0 014.1 2h3a2 2 0 012 1.7c.1.9.3 1.8.6 2.7a2 2 0 01-.5 2.1L8 9.7a16 16 0 006 6l1.2-1.2a2 2 0 012.1-.5c.9.3 1.8.5 2.7.6a2 2 0 011.7 2z" fill="#fff"/></svg></div>
+        <div><strong>Call Us Today</strong><span>87543 34359<br>01502 22114</span></div>
+      </div>
+      <div class="cta-item">
+        <div class="cta-icon"><svg width="19" height="19" viewBox="0 0 24 24" fill="none"><path d="M12 22s7-6.3 7-12a7 7 0 10-14 0c0 5.7 7 12 7 12z" fill="#fff"/><circle cx="12" cy="10" r="2.3" fill="#e2131f"/></svg></div>
+        <div><strong>Visit Our Yards</strong><span>Mettupalayam Main Road,<br>Avinashi, Tirupur - 641654</span></div>
+      </div>
+      <div class="cta-item">
+        <div class="cta-icon"><svg width="19" height="19" viewBox="0 0 24 24" fill="none"><path d="M3 21l1.6-4.7A8.5 8.5 0 1112 20.5c-1.5 0-2.9-.4-4.1-1L3 21z" fill="#fff"/></svg></div>
+        <div><strong>Order Via WhatsApp</strong><span>Quick response and<br>easy ordering</span></div>
+      </div>
+      <div class="cta-item">
+        <div class="cta-icon"><svg width="19" height="19" viewBox="0 0 24 24" fill="none"><path d="M3 7l9-4 9 4-9 4-9-4z" fill="#fff"/><path d="M3 7v10l9 4 9-4V7" stroke="#fff" stroke-width="1.4" stroke-linejoin="round" fill="none"/></svg></div>
+        <div><strong>Pan-India Delivery</strong><span>Online orders available<br>across India</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact-page">
+
+<div class="cp-wrap">
+
+  <!-- Heading -->
+  <div class="cp-heading">
+    <div class="cp-eyebrow">GET IN TOUCH</div>
+    <h1>CONTACT <span>US</span></h1>
+    <p>We are always here to help you. Reach out for any inquiries or requirements.</p>
+  </div>
+
+  <!-- Info bar -->
+  <div class="cp-info-bar">
+    <div class="cp-info-item">
+      <div class="cp-icon-circle">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.81.34 1.6.65 2.34a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.74-1.24a2 2 0 0 1 2.11-.45c.74.31 1.53.53 2.34.65A2 2 0 0 1 22 16.92z"/></svg>
+      </div>
+      <div class="cp-info-text">
+        <h4>PHONE NUMBERS</h4>
+        <a href="tel:+918754334359">87543 34359</a>
+        <a href="tel:+919150222114">91502 22114</a>
+      </div>
+    </div>
+    <div class="cp-info-item">
+      <div class="cp-icon-circle">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg>
+      </div>
+      <div class="cp-info-text">
+        <h4>EMAIL ADDRESS</h4>
+        <a href="mailto:muthuautospares@gmail.com" style="word-break:break-all;">muthuautospares@gmail.com</a>
+      </div>
+    </div>
+    <div class="cp-info-item">
+      <div class="cp-icon-circle">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+      </div>
+      <div class="cp-info-text">
+        <h4>WORKING HOURS</h4>
+        <p class="cp-highlight">Mon - Sat : 9.00 AM - 8.00 PM</p>
+        <p>Sunday Closed</p>
+      </div>
+    </div>
+    <div class="cp-info-item">
+      <div class="cp-icon-circle">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+      </div>
+      <div class="cp-info-text">
+        <h4 style="white-space:normal;">ONLINE ORDERS <span class="cp-highlight">AVAILABLE</span></h4>
+        <p>Easy ordering, fast delivery right to your doorstep.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main grid -->
+  <div class="cp-main-grid">
+
+    <!-- Locations -->
+    <div class="cp-panel">
+      <h2>OUR <span>LOCATIONS</span></h2>
+      <div class="cp-underline"></div>
+
+      <div class="cp-location-block">
+        <div class="cp-loc-title">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>
+          LOCATION 1
+        </div>
+        <p>Mettupalayam Main Road,<br>Avinashi, Tirupur (Dt) - 641 654</p>
+        <a class="cp-btn-outline" href="https://maps.app.goo.gl/r8AVcfzq4sQPXUSW9?g_st=ac" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>
+          VIEW ON MAP
+        </a>
+      </div>
+
+      <div class="cp-location-block">
+        <div class="cp-loc-title">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>
+          LOCATION 2
+        </div>
+        <p>Velliyampalayam,<br>Avinashi, Tirupur (Dt) - 641 654</p>
+        <a class="cp-btn-outline" href="https://maps.app.goo.gl/YCWim8DsgccRe34Y6?g_st=ac" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>
+          VIEW ON MAP
+        </a>
+      </div>
+
+      <div class="cp-map-embed">
+        <iframe loading="lazy" src="https://www.google.com/maps?q=11.1997687,77.2467619(Muthu+Auto+Spares)&z=15&output=embed"></iframe>
+      </div>
+      <a class="cp-map-open-btn" href="https://maps.app.goo.gl/r8AVcfzq4sQPXUSW9?g_st=ac" target="_blank" rel="noopener">
+        OPEN IN GOOGLE MAPS
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14 21 3"/></svg>
+      </a>
+    </div>
+
+    <!-- Inquiry form -->
+    <div class="cp-panel">
+      <h2>SEND US AN <span>INQUIRY</span></h2>
+      <div class="cp-underline"></div>
+      <form id="inquiryForm">
+        <div class="cp-form-group">
+          <div class="cp-input-wrap">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <input type="text" name="name" id="inqName" placeholder="Your Name" required>
+          </div>
+        </div>
+        <div class="cp-form-group">
+          <div class="cp-input-wrap">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.81.34 1.6.65 2.34a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.74-1.24a2 2 0 0 1 2.11-.45c.74.31 1.53.53 2.34.65A2 2 0 0 1 22 16.92z"/></svg>
+            <input type="tel" name="phone" id="inqPhone" placeholder="Your Phone" required>
+          </div>
+        </div>
+        <div class="cp-form-group">
+          <div class="cp-input-wrap">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg>
+            <input type="email" name="email" id="inqEmail" placeholder="Your Email" required>
+          </div>
+        </div>
+        <div class="cp-form-group">
+          <div class="cp-input-wrap">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m20.59 13.41-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><circle cx="7" cy="7" r="1"/></svg>
+            <input type="text" name="subject" id="inqSubject" placeholder="Subject">
+          </div>
+        </div>
+        <div class="cp-form-group">
+          <div class="cp-input-wrap" style="align-items:flex-start;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-top:4px;"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5z"/></svg>
+            <textarea name="message" id="inqMessage" placeholder="Your Message" required></textarea>
+          </div>
+        </div>
+        <button type="submit" class="cp-send-btn">
+          SEND MESSAGE
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+        </button>
+      </form>
+    </div>
+
+    <!-- Why choose us -->
+    <div class="cp-panel">
+      <h2>WHY CHOOSE <span>MUTHU AUTO SPARES?</span></h2>
+      <div class="cp-underline"></div>
+
+      <div class="cp-reason">
+        <div class="cp-icon-circle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <div>
+          <h4>350K+ FOLLOWERS</h4>
+          <p>Trusted by thousands across all platforms.</p>
+        </div>
+      </div>
+
+      <div class="cp-reason">
+        <div class="cp-icon-circle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div>
+          <h4>3-DAY REPLACEMENT GUARANTEE</h4>
+          <p>In case of mismatch or not working.</p>
+        </div>
+      </div>
+
+      <div class="cp-reason">
+        <div class="cp-icon-circle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="6"/><path d="M8.21 13.89 7 23l5-3 5 3-1.21-9.12"/></svg>
+        </div>
+        <div>
+          <h4>100% GENUINE PARTS</h4>
+          <p>Quality checked & performance tested.</p>
+        </div>
+      </div>
+
+      <div class="cp-reason">
+        <div class="cp-icon-circle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="M2 12h2"/><path d="M12 2a10 10 0 1 0 10 10"/><path d="m12 12 4-4"/></svg>
+        </div>
+        <div>
+          <h4>FAST & RELIABLE SERVICE</h4>
+          <p>We ensure the best service experience.</p>
+        </div>
+      </div>
+
+      <div class="cp-follow">
+        <h4>FOLLOW US ON</h4>
+        <div class="cp-social-row">
+          <a href="https://www.facebook.com/p/Muthus-Scrap-Yard-Avinashi-100083053610640/" target="_blank" rel="noopener" aria-label="Facebook">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.5 9.87v-6.98H7.9V12h2.6V9.8c0-2.6 1.55-4.03 3.92-4.03 1.13 0 2.32.2 2.32.2v2.55h-1.3c-1.29 0-1.69.8-1.69 1.62V12h2.88l-.46 2.89h-2.42v6.98A10 10 0 0 0 22 12z"/></svg>
+          </a>
+          <a href="https://www.instagram.com/muthu_auto_spares?igsh=MW1hMzVhczd3dXU2Mw==" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>
+          </a>
+          <a href="https://youtube.com/@muthuautospares?si=8eycVgnmFYaJVqfv" target="_blank" rel="noopener" aria-label="YouTube">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.42a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.42 8.6.42 8.6.42s6.88 0 8.6-.42a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.33 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg>
+          </a>
+          <a href="https://wa.me/918754334359" target="_blank" rel="noopener" aria-label="WhatsApp">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39a9.9 9.9 0 0 0 4.75 1.21h.01c5.46 0 9.9-4.45 9.9-9.9 0-2.65-1.03-5.13-2.9-7A9.82 9.82 0 0 0 12.04 2zm0 18.06h-.01a8.2 8.2 0 0 1-4.18-1.15l-.3-.18-3.14.82.84-3.06-.2-.31a8.2 8.2 0 0 1-1.26-4.37c0-4.53 3.69-8.22 8.24-8.22 2.2 0 4.27.86 5.82 2.42a8.17 8.17 0 0 1 2.41 5.81c0 4.54-3.7 8.24-8.22 8.24zm4.51-6.16c-.25-.12-1.47-.72-1.7-.81-.23-.08-.39-.12-.56.13-.17.24-.64.8-.78.97-.14.17-.29.19-.53.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.24-.02-.38.11-.5.11-.11.25-.29.37-.43.13-.15.17-.25.25-.42.08-.17.04-.31-.02-.43-.06-.12-.56-1.35-.77-1.85-.2-.48-.41-.42-.56-.42h-.48c-.17 0-.43.06-.66.31-.23.24-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.57.12.17 1.75 2.67 4.25 3.74.59.26 1.06.41 1.42.52.6.19 1.14.16 1.57.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.14-1.18-.07-.1-.23-.16-.48-.28z"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer bar -->
+  <div class="cp-footer-bar">
+    <div class="cp-footer-left">
+      <div class="cp-icon-circle">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.81.34 1.6.65 2.34a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.74-1.24a2 2 0 0 1 2.11-.45c.74.31 1.53.53 2.34.65A2 2 0 0 1 22 16.92z"/></svg>
+      </div>
+            <div>
+        <p>Have questions or need help?</p>
+        <a href="tel:+918754334359">Call now, we are happy to assist you!</a>
+      </div>
+
+      <a href="privacy-policy.html" class="cp-privacy-btn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+        Privacy Policy
+        <span class="arrow">&rarr;</span>
+      </a>
+    </div>
+    <div class="cp-footer-right">
+      <p>Your Trusted Partner for<br><span class="cp-highlight">Used Auto Parts & Scrap Solutions.</span></p>
+    </div>
+  </div>
+
+     
+
+</div>
+
+</section>
+
+
+<script>
+  const burgerBtn = document.getElementById('burgerBtn');
+  const menuCloseBtn = document.getElementById('menuCloseBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+  const menuOverlay = document.getElementById('menuOverlay');
+
+  function openMenu(){
+    mobileMenu.classList.add('open');
+    menuOverlay.classList.add('open');
+    burgerBtn.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeMenu(){
+    mobileMenu.classList.remove('open');
+    menuOverlay.classList.remove('open');
+    burgerBtn.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  burgerBtn.addEventListener('click', () => {
+    mobileMenu.classList.contains('open') ? closeMenu() : openMenu();
+  });
+  menuCloseBtn.addEventListener('click', closeMenu);
+  menuOverlay.addEventListener('click', closeMenu);
+
+  document.querySelectorAll('.mobile-nav-links a').forEach(link => {
+    link.addEventListener('click', closeMenu);
+  });
+
+  // ===== STORE OPEN/CLOSED STATUS =====
+  // Hours: Mon-Sat 9:30 AM - 8:00 PM, Sunday closed
+  function updateStoreStatus(){
+    const badge = document.getElementById('statusBadge');
+    const text = document.getElementById('statusText');
+    const now = new Date();
+    const day = now.getDay(); // 0 = Sunday
+    const minutes = now.getHours() * 60 + now.getMinutes();
+    const openTime = 9 * 60 + 30;
+    const closeTime = 20 * 60;
+
+    const isOpen = day !== 0 && minutes >= openTime && minutes < closeTime;
+
+    badge.classList.toggle('is-open', isOpen);
+    badge.classList.toggle('is-closed', !isOpen);
+    text.textContent = isOpen ? 'Open Now' : 'Closed';
+  }
+  updateStoreStatus();
+  setInterval(updateStoreStatus, 60000);
+
+  // ===== INQUIRY FORM -> SEND DIRECTLY TO WHATSAPP =====
+  const WHATSAPP_NUMBER = "918015010286"; // 91 = India country code + 8015010286
+
+  const inquiryForm = document.getElementById('inquiryForm');
+  inquiryForm.addEventListener('submit', function(e){
+    e.preventDefault();
+
+    const name = document.getElementById('inqName').value.trim();
+    const phone = document.getElementById('inqPhone').value.trim();
+    const email = document.getElementById('inqEmail').value.trim();
+    const subject = document.getElementById('inqSubject').value.trim();
+    const message = document.getElementById('inqMessage').value.trim();
+
+    let text = "New Inquiry - Muthu Auto Spares & Scrap Yard%0A%0A";
+    text += "Name: " + encodeURIComponent(name) + "%0A";
+    text += "Phone: " + encodeURIComponent(phone) + "%0A";
+    text += "Email: " + encodeURIComponent(email) + "%0A";
+    if(subject){ text += "Subject: " + encodeURIComponent(subject) + "%0A"; }
+    text += "Message: " + encodeURIComponent(message);
+
+    const whatsappURL = "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + text;
+
+    window.open(whatsappURL, "_blank");
+
+    inquiryForm.reset();
+  });
+</script>
+
+</body>
+</html>
